@@ -4,15 +4,17 @@ Coleta e condensa informações oriundas de arquivos de planilha do INEP.
 
 import os
 import locale
+import re
 from functools import reduce
 
+import numpy as np
 import pandas as pd
 
 
 def get_cpc_data(ano_calculo, path, anos_calculo=None, sigla_instituicao='UFSM'):
-    files = [x for x in os.listdir(path) if 'cpc_' in x]
+    files = [x for x in os.listdir(path) if len(re.findall('cpc_([0-9]{4})', x)) > 0]
     if anos_calculo is None:
-        anos_calculo = (anos_calculo, ano_calculo - 1, ano_calculo - 2)
+        anos_calculo = (ano_calculo, ano_calculo - 1, ano_calculo - 2)
     files = [x for x in files if any([str(y) in x for y in anos_calculo])]
 
     cpcs = [pd.read_csv(os.path.join(path, x), sep=',', encoding='utf-8') for x in files]
@@ -35,7 +37,13 @@ def get_cpc_data(ano_calculo, path, anos_calculo=None, sigla_instituicao='UFSM')
         to_drop = loced.loc[loced['Ano'] != loced['Ano'].max()]
         all_cpcs = all_cpcs.drop(to_drop.index, axis='index')
 
-    all_cpcs.loc[:, 'CPC (Contínuo)'] = all_cpcs['CPC (Contínuo)'].apply(locale.atof)
+    for column in all_cpcs.columns:
+        try:
+            all_cpcs.loc[:, column] = all_cpcs[column].apply(lambda x: locale.atof(x) if not pd.isna(x) else np.nan)
+        except (ValueError, AttributeError) as e:
+            pass
+
+    # all_cpcs.loc[:, 'CPC (Contínuo)'] = all_cpcs['CPC (Contínuo)'].apply(locale.atof)
 
     return all_cpcs
 

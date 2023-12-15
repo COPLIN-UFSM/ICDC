@@ -1,4 +1,5 @@
 import csv
+import locale
 import os
 
 import pandas as pd
@@ -6,6 +7,9 @@ import argparse
 from datetime import datetime as dt
 
 from db2 import DB2Connection
+
+from scripts import get_canonical_name
+from scripts.inep_routines import get_cpc_data
 
 
 def get_evasion_map():
@@ -130,27 +134,65 @@ def get_students(database_credentials):
         );
         '''
 
+    query_str_docentes = '''
+    select
+        TV.ID_TURMA,
+        TV.ANO ANO_TURMA,
+        TD.ID_UNIDADE_DEPTO ID_UNIDADE_TURMA, UNIDADE_TURMA.NOME_UNIDADE NOME_UNIDADE_TURMA,
+        TV.ID_DISCIPLINA, disci.NOME_DISCIPLINA,
+        TV.ID_CURSO, AC.NOME_CURSO,
+        td.ID_DOCENTE, gsu.NOME_FUNCIONARIO NOME_DOCENTE,
+        GSU.ID_LOT_EXERCICIO ID_UNIDADE_EXERCICIO_DOCENTE, UNIDADE_DOCENTE_EXERCICIO.NOME_UNIDADE NOME_UNIDADE_EXERCICIO_DOCENTE,
+        GSU.ID_LOT_OFICIAL ID_UNIDADE_OFICIAL_DOCENTE, UNIDADE_DOCENTE_OFICIAL.NOME_UNIDADE NOME_UNIDADE_OFICIAL_DOCENTE,
+        TV.CH_REALIZADA, TD.ENC_DIDATICO
+    from TURMAS_VAGAS TV
+    inner join TURMAS_DOCENTES TD on TV.ID_TURMA = TD.ID_TURMA
+    INNER JOIN GERAL_SERVIDORES_UFSM GSU on td.ID_DOCENTE = gsu.ID_CONTRATO_RH
+    inner join V_DISCIPLINAS disci on tv.ID_DISCIPLINA = disci.ID_DISCIPLINA
+    inner join NAV_UNIDADES UNIDADE_TURMA on td.ID_UNIDADE_DEPTO = UNIDADE_TURMA.ID_UNIDADE
+    inner join NAV_UNIDADES UNIDADE_DOCENTE_EXERCICIO on gsu.ID_LOT_EXERCICIO = UNIDADE_DOCENTE_EXERCICIO.ID_UNIDADE
+    inner join NAV_UNIDADES UNIDADE_DOCENTE_OFICIAL on gsu.ID_LOT_OFICIAL = UNIDADE_DOCENTE_OFICIAL.ID_UNIDADE
+    inner join acad_cursos AC on TV.ID_CURSO = AC.ID_CURSO
+    where TV.ano >= 2021;
+    '''
+
     alunos = get_something(database_credentials, query_str_alunos)
     return alunos
 
 
+def cpc_to_file(*, ano_calculo=None, anos_calculo=None):
+    cpc = get_cpc_data(ano_calculo=ano_calculo, path='data', anos_calculo=anos_calculo, sigla_instituicao='UFSM')
+    map_conv = {x: '_'.join([y.upper() for y in get_canonical_name(x).split(' ')]).replace('__', '_') for x in cpc.columns}
+
+    cpc = cpc.rename(columns=map_conv)
+
+    cpc.to_csv(
+        os.path.join('data', 'cpc_ufsm.csv'), index=False,
+        encoding='utf-8', sep=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC
+    )
+    return cpc
+
+
 def main(database_credentials, filename='alunos_sie.csv'):
-    if not os.path.exists(os.path.join('data', filename)):
-        print('carregando do banco de dados...')
-        alunos = get_students(database_credentials)
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+    # if not os.path.exists(os.path.join('data', filename)):
+    #     print('carregando do banco de dados...')
+    #     alunos = get_students(database_credentials)
+    #
+    #     alunos.to_csv(
+    #         os.path.join('data', filename), index=False,
+    #         encoding='utf-8', sep=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC
+    #     )
+    # else:
+    #     print('carregando do disco...')
+    #     alunos = pd.read_csv(
+    #         os.path.join('data', filename),
+    #         encoding='utf-8', sep=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC
+    #     )
+    # print(alunos)
 
-        alunos.to_csv(
-            os.path.join('data', filename), index=False,
-            encoding='utf-8', sep=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC
-        )
-    else:
-        print('carregando do disco...')
-        alunos = pd.read_csv(
-            os.path.join('data', filename),
-            encoding='utf-8', sep=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC
-        )
-
-    print(alunos)
+    cpc = cpc_to_file(anos_calculo=(2018, 2019, 2021))
+    print(cpc)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
-# Título do repositório
+# IGC
 
-Descrição curta do repositório.
+Cálculo do índice geral de cursos (IGC), calculado pelo INEP, mas adaptado para calcular de cursos, departamentos, 
+docentes...
 
 ## Sumário
 
