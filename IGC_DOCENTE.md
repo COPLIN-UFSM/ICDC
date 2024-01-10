@@ -8,7 +8,7 @@ $$
 
 Onde:
 
-* $\text{Media}\_{dm}$ é a nota média do docente na modalidade $m$ (graduação, mestrado ou doutorado);
+* $\text{Media}\_{m}$ é a nota média do docente na modalidade $m$ (graduação, mestrado ou doutorado);
 * $T$ são todas as turmas do docente para o ano calculado, e $t$ é uma turma em particular;
 * $N\_{c}^{(t)}$ são o número de alunos aprovados com nota, reprovados com nota, ou matriculados na disciplina, no ano de cálculo;
 * $\text{encargo}^{(t)}$ é o encargo didático da turma;
