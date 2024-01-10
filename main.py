@@ -1,3 +1,7 @@
+"""
+Lógica usando dados abertos de censo.
+"""
+
 import argparse
 import locale
 import os

@@ -35,9 +35,18 @@ As configurações da máquina que o repositório foi desenvolvido encontram-se 
 Descreva aqui as instruções para instalar as ferramentas, bibliotecas e plugins para executar o código do projeto:
 
 ```bash
-conda create --name myenv python==3.* pip --yes
-conda activate myenv
+conda create --name igc python==3.11.* pip --yes
+conda activate igc
+pip install ibm_db
+pip install "git+https://github.com/COPLIN-UFSM/db2.git"
 conda install --file requirements.txt --yes
+pip install --requirement pip_requirements.txt
+```
+
+**NOTA:** caso encontre problemas com o ibm_db no Windows, utilize a versão 3.1.4:
+
+```bash
+pip install ibm_db==3.1.4
 ```
 
 ## Instruções de Uso

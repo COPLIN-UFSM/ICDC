@@ -1,5 +1,7 @@
 # Painéis
 
+Painéis para cálculo do IGC dinâmico, com base nos dados disponíveis no banco de dados da UFSM.
+
 ## Caveats
 
 * ID_DISCENTE: equivalente a ID_CURSO_ALUNO na tabela CURSOS_ALUNOS_ATZ
@@ -15,7 +17,8 @@
 * **Conceito_POS:** Dados de conceito CAPES, provenientes de uma coleta da Sucupira. Estão em tabelas SUCUPIRA_* no 
   banco de dados. Uma linha por curso/por ano. **Apenas** cursos que estão funcionando 
   (status EM FUNCIONAMENTO ou EM DESATIVACAO na plataforma Sucupira) **E** possuem conceitos CAPES (ou seja, cursos que 
-  **não estão** em avaliação) 
+  **não estão** em avaliação)
+* Alunos: Uma linha por aluno.
 
 ## Tabelas secundárias
 
@@ -32,7 +35,8 @@ Podem e devem ser utilizadas em um relatório do Power BI.
 
 * Docente: Relação de docentes. Uma linha por docente.
 * Curso: Cursos como aparecem no banco bee. Possui ID_CURSO como chave primária. Uma linha por curso 
-* Turma: 
+* Turma: Uma linha por aluno, por docente, por turma. Apenas alunos aprovados com nota, reprovados com nota, e 
+  matriculados.
 
 
 ```mermaid
