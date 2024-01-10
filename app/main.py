@@ -51,7 +51,6 @@ def calcular_igc(professor):
         elif nivel == 'Pós-Graduação':
             # pega apenas alunos cujo programa de pós é o mesmo programa do curso de solicitação da vaga
             alunos = alunos.loc[alunos['ID_PROGRAMA_DISCENTE'] == alunos['ID_PROGRAMA_SOLICITACAO_TURMA']]
-            # TODO conta errada para pós-graduação!
 
         gb_turmas = alunos.groupby(by='ID_TURMA').groups
 
@@ -92,8 +91,9 @@ def main(database_credentials, views_path):
     third = pd.merge(second, cursos, left_on='ID_CURSO_SOLICITACAO_TURMA', right_on='ID_CURSO', suffixes=('', '_CURSO_SOLICITACAO_TURMA'))
 
     # TODO retirar depois - apenas para teste!
-    professor = third.loc[third['NOME_DOCENTE'] == 'MARTHA BOHRER ADAIME']
+    # professor = third.loc[third['NOME_DOCENTE'] == 'MARTHA BOHRER ADAIME']
     # professor = third.loc[third['NOME_DOCENTE'] == 'HENRY EMANUEL LEAL CAGNINI']
+    professor = third.loc[third['NOME_DOCENTE'] == 'LEONARDO RAMOS EMMENDORFER']
 
     igc = calcular_igc(professor)
     print(igc)
