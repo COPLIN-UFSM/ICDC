@@ -21,21 +21,23 @@ Alunos de graduação possuem peso $P\_{\text{graduação},c} = 1$, enquanto alu
 
 ### Mestrado
 
-| Conceito do mestrado Capes | Peso referente a matrículas no Mestrado para fins de cálculo do IGC |
-| 3                          | 1                                                                   |
-| 4                          | 2                                                                   |
-| 5                          | 3                                                                   |
-| 6                          | 3                                                                   |
-| 7                          | 3                                                                   |
+| Conceito do mestrado Capes | $P\_{\text{mestrado},c}$ |
+|:---------------------------|:-------------------------|
+| 3                          | 1                        |
+| 4                          | 2                        |
+| 5                          | 3                        |
+| 6                          | 3                        |
+| 7                          | 3                        |
 
 ### Doutorado
 
-| Conceito do doutorado Capes | Peso referente a matrículas no Doutorado para fins de cálculo do IGC |
-| 3                          | 1                                                                     |
-| 4                          | 2                                                                     |
-| 5                          | 3                                                                     |
-| 6                          | 4                                                                     |
-| 7                          | 5                                                                     |
+| Conceito do doutorado Capes | $P\_{\text{doutorado},c}$ |
+|:----------------------------|:--------------------------|
+| 3                          | 1                          |
+| 4                          | 2                          |
+| 5                          | 3                          |
+| 6                          | 4                          |
+| 7                          | 5                          |
 
 ## Proporção de alunos
 
