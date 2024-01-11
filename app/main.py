@@ -33,11 +33,9 @@ def download_views(database_credentials, views_path):
 
 def calcular_igc(professor):
     # pega apenas os cursos de graduação
-    # crop = crop.loc[crop['NOME_NIVEL_CURSO_SOLICITACAO_TURMA'] == 'Graduação']
-    total_alunos = 0
-
     gb_niveis = professor.groupby(by='NOME_NIVEL_CURSO_SOLICITACAO_TURMA').groups
 
+    total_alunos = 0
     n_alunos_niveis = []
     media_niveis = []
 
@@ -50,7 +48,9 @@ def calcular_igc(professor):
             alunos = alunos.loc[alunos['ID_CURSO_DISCENTE'] == alunos['ID_CURSO_SOLICITACAO_TURMA']]
         elif nivel == 'Pós-Graduação':
             # pega apenas alunos cujo programa de pós é o mesmo programa do curso de solicitação da vaga
-            alunos = alunos.loc[alunos['ID_PROGRAMA_DISCENTE'] == alunos['ID_PROGRAMA_SOLICITACAO_TURMA']]
+            alunos = alunos.loc[alunos['ID_PROGRAMA_SUCUPIRA_DISCENTE'] == alunos['ID_PROGRAMA_SOLICITACAO_TURMA']]
+        else:
+            raise TypeError(f'Nível desconhecido: {nivel}')
 
         gb_turmas = alunos.groupby(by='ID_TURMA').groups
 
@@ -64,7 +64,7 @@ def calcular_igc(professor):
 
             numerador += num_dt.sum()
             denominador += den_dt.sum()
-            n_alunos_nivel = turma['PESO_ALUNO'].sum()
+            n_alunos_nivel += turma['PESO_ALUNO'].sum()
 
         media_nivel = numerador/denominador
 
@@ -79,6 +79,10 @@ def calcular_igc(professor):
     return igc
 
 
+def novo_calculo(crop):
+    pass
+
+
 def main(database_credentials, views_path):
     docentes = pd.read_csv(os.path.join(views_path, 'PAINEL_IGC_DOCENTES.csv'))
     cursos = pd.read_csv(os.path.join(views_path, 'PAINEL_IGC_CURSOS.csv'))
@@ -86,17 +90,50 @@ def main(database_credentials, views_path):
 
     turmas.loc[pd.isna(turmas['NOTA_DOCENTE_PELO_DISCENTE']), 'NOTA_DOCENTE_PELO_DISCENTE'] = 0.6
 
+    # liga docentes com turmas
     first = pd.merge(docentes, turmas)
-    second = pd.merge(first, cursos, left_on='ID_CURSO_DISCENTE', right_on='ID_CURSO', suffixes=('', '_CURSO_DISCENTE'))
-    third = pd.merge(second, cursos, left_on='ID_CURSO_SOLICITACAO_TURMA', right_on='ID_CURSO', suffixes=('', '_CURSO_SOLICITACAO_TURMA'))
+    # liga o curso do discente com cursos
+    cursos_discente = cursos.copy(deep=True)
+    cursos_discente = cursos_discente.rename(
+        columns={x: x + '_DISCENTE' if x != 'ID_CURSO' else 'ID_CURSO' for x in cursos_discente.columns}
+    )
+    cursos_solicitacao_turma = cursos.copy(deep=True)
+    cursos_solicitacao_turma = cursos_solicitacao_turma.rename(
+        columns={
+            x: x + '_CURSO_SOLICITACAO_TURMA' if x != 'ID_CURSO'
+            else 'ID_CURSO'
+            for x in cursos_solicitacao_turma.columns
+        }
+    )
+
+    second = pd.merge(
+        first, cursos_discente,
+        left_on='ID_CURSO_DISCENTE', right_on='ID_CURSO',  suffixes=('', '_CURSO_DISCENTE')
+    )
+    # liga o curso de solicitação da turma com cursos
+    third = pd.merge(
+        second, cursos_solicitacao_turma,
+        left_on='ID_CURSO_SOLICITACAO_TURMA', right_on='ID_CURSO',  suffixes=('', '_CURSO_SOLICITACAO_TURMA')
+    )
+
+    # remove coluna ID_CURSO, que foi usada apenas para o merge
+    third = third.drop(columns=['ID_CURSO'])
+    third['CPC_CONTINUO'] = third['CPC_CONTINUO'].astype(float)
 
     # TODO retirar depois - apenas para teste!
     # professor = third.loc[third['NOME_DOCENTE'] == 'MARTHA BOHRER ADAIME']
     # professor = third.loc[third['NOME_DOCENTE'] == 'HENRY EMANUEL LEAL CAGNINI']
     professor = third.loc[third['NOME_DOCENTE'] == 'LEONARDO RAMOS EMMENDORFER']
 
+    # professor.to_csv(
+    #     'abuble.csv', index=False, encoding='ISO-8859-1', sep=';', quotechar='"',
+    #     decimal=',', float_format='%.4f', quoting=csv.QUOTE_NONNUMERIC
+    # )
+
     igc = calcular_igc(professor)
-    print(igc)
+    # igc_novo = novo_calculo(professor)
+    print('IGC antigo:', igc)
+    # print('IGC novo:', igc_novo)
 
 
 if __name__ == '__main__':
