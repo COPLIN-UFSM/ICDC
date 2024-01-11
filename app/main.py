@@ -48,7 +48,9 @@ def calcular_igc(professor):
             alunos = alunos.loc[alunos['ID_CURSO_DISCENTE'] == alunos['ID_CURSO_SOLICITACAO_TURMA']]
         elif nivel == 'Pós-Graduação':
             # pega apenas alunos cujo programa de pós é o mesmo programa do curso de solicitação da vaga
-            alunos = alunos.loc[alunos['ID_PROGRAMA_SUCUPIRA_DISCENTE'] == alunos['ID_PROGRAMA_SOLICITACAO_TURMA']]
+            alunos = alunos.loc[
+                alunos['ID_PROGRAMA_SUCUPIRA_DISCENTE'] == alunos['ID_PROGRAMA_SUCUPIRA_CURSO_SOLICITACAO_TURMA']
+                ]
         else:
             raise TypeError(f'Nível desconhecido: {nivel}')
 
