@@ -3,16 +3,41 @@
 ## Nota média por modalidade
 
 $$
-\text{Media}\_{m} = \frac{\sum\_{t}^{T \in m} (N\_{c}^{(t)} * \text{encargo}^{(t)} * \text{CPC}\_c^{(t)})}{\sum\_{t}^{T \in m} (N_{c}^{(t)} * \text{encargo}^{(t)})}
+\text{Media}\_{m} = \frac{\sum\_{t}^{T \in m} (N\_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)} * \text{CPC}\_c^{(t)})}{\sum\_{t}^{T \in m} (N_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)})}
 $$
 
 Onde:
 
 * $\text{Media}\_{m}$ é a nota média do docente na modalidade $m$ (graduação, mestrado ou doutorado);
-* $T$ são todas as turmas do docente para o ano calculado, e $t$ é uma turma em particular;
+* $T$ são todas as turmas do docente para a modalidade $m$, para o ano calculado, sendo $t$ uma turma em particular;
+* $P\_{m,c}$ é o peso do discente para aquela modalidade, para aquele curso (veja Tabela 1);
 * $N\_{c}^{(t)}$ são o número de alunos aprovados com nota, reprovados com nota, ou matriculados na disciplina, no ano de cálculo;
 * $\text{encargo}^{(t)}$ é o encargo didático da turma;
 * $\text{CPC}\_c^{(t)}$ é o CPC contínuo mais recente para o curso de solicitação da vaga na turma.
+
+## Relação de peso de alunos 
+
+Alunos de graduação possuem peso $P\_{\text{graduação},c} = 1$, enquanto alunos de pós-graduação são multiplicados por um peso, de acordo com uma tabela de conversão do INEP:
+
+### Mestrado
+
+| Conceito do mestrado Capes | $P\_{\text{mestrado},c}$ |
+|:---------------------------|:-------------------------|
+| 3                          | 1                        |
+| 4                          | 2                        |
+| 5                          | 3                        |
+| 6                          | 3                        |
+| 7                          | 3                        |
+
+### Doutorado
+
+| Conceito do doutorado Capes | $P\_{\text{doutorado},c}$ |
+|:----------------------------|:--------------------------|
+| 3                          | 1                          |
+| 4                          | 2                          |
+| 5                          | 3                          |
+| 6                          | 4                          |
+| 7                          | 5                          |
 
 ## Proporção de alunos
 
