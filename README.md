@@ -55,7 +55,7 @@ Descreva aqui o passo-a-passo que outros usuários precisam realizar para conseg
 deste projeto:
 
 ```bash
-python main.py
+python from_open_data.py
 ```
 
 ## Contato

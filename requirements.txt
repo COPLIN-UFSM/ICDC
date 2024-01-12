@@ -3,3 +3,4 @@ numpy
 pip
 tqdm
 plotly
+dash
