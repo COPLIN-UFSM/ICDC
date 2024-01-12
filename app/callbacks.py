@@ -1,10 +1,8 @@
 import dash
-import numpy as np
 import pandas as pd
-from dash import Output, Input, State
-from dash.exceptions import PreventUpdate
+from dash import Output, Input
 
-from from_live_data import calcular_igc
+from app import calcular_igc
 
 
 def define_callbacks(app: dash.Dash, df: pd.DataFrame) -> dash.Dash:
