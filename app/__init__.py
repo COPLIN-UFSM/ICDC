@@ -1,4 +1,5 @@
 import csv
+import locale
 import os
 
 import pandas as pd
@@ -39,7 +40,6 @@ def load_dataframe(database_credentials, views_path):
 
     # remove coluna ID_CURSO, que foi usada apenas para o merge
     third = third.drop(columns=['ID_CURSO'])
-    third['CPC_CONTINUO'] = third['CPC_CONTINUO'].astype(float)
 
     return third
 
@@ -89,17 +89,9 @@ def calcular_igc(professor):
         alunos = professor.loc[indices]
         n_alunos_nivel = 0
 
-        if nivel == 'Graduação':
-            # pega apenas alunos cujo curso é o mesmo do curso de solicitação da vaga
-            # alunos = alunos.loc[alunos['ID_CURSO_DISCENTE'] == alunos['ID_CURSO_SOLICITACAO_TURMA']]
-            alunos = alunos.loc[alunos['COD_E_MEC_CURSO_DISCENTE'] == alunos['COD_E_MEC_CURSO_SOLICITACAO_TURMA']]
-        elif nivel == 'Pós-Graduação':
-            # pega apenas alunos cujo programa de pós é o mesmo programa do curso de solicitação da vaga
-            alunos = alunos.loc[
-                alunos['ID_PROGRAMA_SUCUPIRA_DISCENTE'] == alunos['ID_PROGRAMA_SUCUPIRA_CURSO_SOLICITACAO_TURMA']
-                ]
-        else:
-            raise TypeError(f'Nível desconhecido: {nivel}')
+        alunos = alunos.loc[
+            alunos['CODIGO_CURSO_UNIFICADO_CURSO_DISCENTE'] == alunos['CODIGO_CURSO_UNIFICADO_CURSO_SOLICITACAO_TURMA']
+        ]
 
         gb_turmas = alunos.groupby(by='ID_TURMA').groups
 
