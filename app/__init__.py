@@ -16,7 +16,7 @@ def load_dataframe(database_credentials, views_path):
     # liga o curso do discente com cursos
     cursos_discente = df_views['PAINEL_IGC_CURSOS'].copy(deep=True)
     cursos_discente = cursos_discente.rename(
-        columns={x: x + '_DISCENTE' if x != 'ID_CURSO' else 'ID_CURSO' for x in cursos_discente.columns}
+        columns={x: x + '_CURSO_DISCENTE' if x != 'ID_CURSO' else 'ID_CURSO' for x in cursos_discente.columns}
     )
     cursos_solicitacao_turma = df_views['PAINEL_IGC_CURSOS'].copy(deep=True)
     cursos_solicitacao_turma = cursos_solicitacao_turma.rename(
@@ -92,7 +92,7 @@ def calcular_igc(professor):
         if nivel == 'Graduação':
             # pega apenas alunos cujo curso é o mesmo do curso de solicitação da vaga
             # alunos = alunos.loc[alunos['ID_CURSO_DISCENTE'] == alunos['ID_CURSO_SOLICITACAO_TURMA']]
-            alunos = alunos.loc[alunos['COD_E_MEC_DISCENTE'] == alunos['COD_E_MEC_CURSO_SOLICITACAO_TURMA']]
+            alunos = alunos.loc[alunos['COD_E_MEC_CURSO_DISCENTE'] == alunos['COD_E_MEC_CURSO_SOLICITACAO_TURMA']]
         elif nivel == 'Pós-Graduação':
             # pega apenas alunos cujo programa de pós é o mesmo programa do curso de solicitação da vaga
             alunos = alunos.loc[
