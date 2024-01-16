@@ -37,7 +37,7 @@ Descreva aqui as instruções para instalar as ferramentas, bibliotecas e plugin
 ```bash
 conda create --name igc python==3.11.* pip --yes
 conda activate igc
-pip install ibm_db
+pip install ibm_db  # use ibm_db==3.1.4 para o Windows
 pip install "git+https://github.com/COPLIN-UFSM/db2.git"
 conda install --file requirements.txt --yes
 pip install --requirement pip_requirements.txt

@@ -1,6 +1,9 @@
+pip
 pandas
 numpy
-pip
 tqdm
 plotly
 dash
+scikit-learn
+scipy
+matplotlib
