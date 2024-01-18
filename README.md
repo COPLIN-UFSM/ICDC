@@ -51,11 +51,8 @@ pip install ibm_db==3.1.4
 
 ## Instruções de Uso
 
-Descreva aqui o passo-a-passo que outros usuários precisam realizar para conseguir executar com sucesso o código-fonte
-deste projeto:
-
 ```bash
-python from_open_data.py
+python run.py --database-credentials instance/database_credentials.json --views-path instance/data/views
 ```
 
 ## Contato
