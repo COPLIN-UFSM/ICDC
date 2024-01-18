@@ -70,9 +70,11 @@ As configurações da máquina que o repositório foi desenvolvido encontram-se 
 
 ## Instruções de Uso
 
-Para executar o dashboard, entre na pasta IGC (`cd IGC`) pela linha de comando, e execute da seguinte forma:
+Para executar o dashboard, entre na pasta IGC pela linha de comando, e execute da seguinte forma:
 
 ```bash
+cd IGC  # entra na pasta clonada - pode ser outro diretório que não este
+conda activate igc  # ativa o ambiente virtual 
 python run.py --database-credentials instance/database_credentials.json --views-path instance/data/views
 ```
 
