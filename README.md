@@ -13,9 +13,6 @@ docentes...
 
 ## Pré-requisitos
 
-Esta seção detalha os pré-requisitos que outro usuário precisa atingir para poder executar o código-fonte. Por exemplo,
-o parágrafo abaixo descreve um requisito do Python Anaconda:
-
 Este repositório requer a última versão do [Python Anaconda](https://www.anaconda.com/download) para ser executado, 
 visto que usa o gerenciador de pacotes conda. O código executará em qualquer Sistema Operacional, mas foi desenvolvido
 originalmente para Windows 10 Pro (64 bits).
@@ -32,38 +29,59 @@ As configurações da máquina que o repositório foi desenvolvido encontram-se 
 
 ## Instalação
 
-Descreva aqui as instruções para instalar as ferramentas, bibliotecas e plugins para executar o código do projeto:
+1. Crie um ambiente virtual do Anaconda com as seguintes configurações:
 
-```bash
-conda create --name igc python==3.11.* pip --yes
-conda activate igc
-pip install ibm_db  # use ibm_db==3.1.4 para o Windows
-pip install "git+https://github.com/COPLIN-UFSM/db2.git"
-conda install --file requirements.txt --yes
-pip install --requirement pip_requirements.txt
-```
+   ```bash
+   conda create --name igc python==3.11.* pip --yes
+   conda activate igc
+   pip install ibm_db  # use ibm_db==3.1.4 para o Windows
+   pip install "git+https://github.com/COPLIN-UFSM/db2.git"
+   conda install --file requirements.txt --yes
+   pip install --requirement pip_requirements.txt
+   ```
 
-**NOTA:** caso encontre problemas com o ibm_db no Windows, utilize a versão 3.1.4:
+2. Clone este repositório na sua máquina (ou então baixe o zip e descompacte em algum local):
 
-```bash
-pip install ibm_db==3.1.4
-```
+   ```bash
+   git clone https://github.com/COPLIN-UFSM/IGC.git
+   ```
+   
+3. Dentro da pasta IGC, crie uma pasta `instance`. Dentro dela, crie outra pasta, `data`, e dentro desta última uma pasta `views`,
+   de maneira que a estrutura de pastas fique da seguinte forma:
+
+   * IGC
+     * instance
+       * database_credentials.json
+       * data
+         * views
+
+4. Crie um arquivo `database_credentials.json` dentro da pasta `instance`, com as seguintes informações:
+
+   ```json
+   {
+     "user": "bee",
+     "password": null,
+     "host": "bi.proj.ufsm.br",
+     "port": 50000,
+     "database": "bee"
+   }
+   ```
+   Substitua `null` pela senha de acesso ao banco de dados.
 
 ## Instruções de Uso
 
-Descreva aqui o passo-a-passo que outros usuários precisam realizar para conseguir executar com sucesso o código-fonte
-deste projeto:
+Para executar o dashboard, entre na pasta IGC pela linha de comando, e execute da seguinte forma:
 
 ```bash
-python from_open_data.py
+cd IGC  # entra na pasta clonada - pode ser outro diretório que não este
+conda activate igc  # ativa o ambiente virtual 
+python run.py --database-credentials instance/database_credentials.json --views-path instance/data/views
 ```
 
 ## Contato
 
-O repositório foi originalmente desenvolvido por Fulano: [fulano@ufsm.br]()
+O repositório foi originalmente desenvolvido por Henry: [fulano@ufsm.br]()
 
 ## Bibliografia
-
-Adicione aqui entradas numa lista com a documentação pertinente:
 
 * [Documentação ibm_db](https://www.ibm.com/docs/en/db2/11.5?topic=framework-application-development-db)
