@@ -13,6 +13,20 @@ def define_layout(app: dash.Dash, df: pd.DataFrame) -> dash.Dash:
         id='selector-professor',
     )
 
+    selector_nivel = dcc.Dropdown(
+        options=sorted(df['NOME_NIVEL_CURSO_SOLICITACAO_TURMA'].unique().tolist()),
+        placeholder='Selecione',
+        multi=False,
+        id='selector-nivel',
+    )
+
+    selector_modalidade = dcc.Dropdown(
+        options=sorted(df['NOME_MODALIDADE_CURSO_SOLICITACAO_TURMA'].unique().tolist()),
+        placeholder='Selecione',
+        multi=False,
+        id='selector-modalidade',
+    )
+
     app.layout = html.Div(
         className='container', children=[
             html.Div(className='row', children=[
@@ -23,6 +37,12 @@ def define_layout(app: dash.Dash, df: pd.DataFrame) -> dash.Dash:
             html.Div(className='row', children=[
                 html.Div(className='col', children=[
                     selector_professor,
+                ]),
+                html.Div(className='col', children=[
+                    selector_nivel,
+                ]),
+                html.Div(className='col', children=[
+                    selector_modalidade,
                 ]),
                 html.Div(className='col', children=[
                     html.P(className='lead', id='output-igc-docente'),
