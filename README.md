@@ -87,7 +87,7 @@ python run.py --database-credentials instance/database_credentials.json --views-
 
 ## Contato
 
-O repositório foi originalmente desenvolvido por Henry: [fulano@ufsm.br]()
+O repositório foi originalmente desenvolvido por Henry: [henry.cagnini@ufsm.br]()
 
 ## Bibliografia
 
