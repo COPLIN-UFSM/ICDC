@@ -5,11 +5,18 @@ docentes...
 
 ## Sumário
 
+* [Documentação](#documentação)
 * [Pré-requisitos](#pré-requisitos)
 * [Instalação](#instalação)
 * [Instruções de uso](#instruções-de-uso)
 * [Contato](#contato)
 * [Bibliografia](#bibliografia)
+
+## Documentação
+
+* Views do banco de dados utilizadas neste repositório: [PAINÉIS](PAINEIS.md)
+* Lógica do cálculo do IGC Docente: [IGC_DOCENTE](IGC_DOCENTE.md)
+* [Nota técnica IGC 2022](data/nota_técnica_igc.pdf)
 
 ## Pré-requisitos
 

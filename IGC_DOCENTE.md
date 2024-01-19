@@ -1,6 +1,16 @@
-# IGC Docente
+# IGC
 
-## Nota média por modalidade
+A nota técnica do ano de 2022 do cálculo do IGC por instituição está [aqui](data/nota_técnica_igc.pdf).
+O cálculo do IGC por docente segue a mesma linha de raciocínio, porém utilizando dados de turmas e encargos.
+
+## IGC Docente
+
+É preciso calcular dois componentes antes de obter-se o valor do IGC: a nota média por modalidade, e a 
+proporção de alunos em cada modalidade.
+
+### Nota média por modalidade
+
+A nota média por modalidade (graduação, mestrado, doutorado) é calculada da seguinte forma:
 
 $$
 \text{Media}\_{m} = \frac{\sum\_{t}^{T \in m} (N\_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)} * \text{CPC}\_c^{(t)})}{\sum\_{t}^{T \in m} (N_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)})}
@@ -15,13 +25,16 @@ Onde:
 * $\text{encargo}^{(t)}$ é o encargo didático da turma;
 * $\text{CPC}\_c^{(t)}$ é o CPC contínuo mais recente para o curso de solicitação da vaga na turma.
 
-## Relação de peso de alunos 
+#### Relação de peso de alunos 
 
-Alunos de graduação possuem peso $P\_{\text{graduação},c} = 1$, enquanto alunos de pós-graduação são multiplicados por um peso, de acordo com uma tabela de conversão do INEP:
+Segundo a [nota técnica](data/nota_técnica_igc.pdf), deve-se estabelecer uma relação de peso entre alunos de graduação
+e pós-graduação, nas modalidades de mestrado e doutorado, a depender do Conceito CAPES do programa de pós-graduação.
 
-### Mestrado
+Alunos de graduação possuem peso $P\_{\text{graduação},c} = 1$, independente do CPC Contínuo do curso.
 
-| Conceito do mestrado Capes | $P\_{\text{mestrado},c}$ |
+##### Equivalência de alunos de mestrado
+
+| Conceito do mestrado CAPES | $P\_{\text{mestrado},c}$ |
 |:---------------------------|:-------------------------|
 | 3                          | 1                        |
 | 4                          | 2                        |
@@ -29,28 +42,35 @@ Alunos de graduação possuem peso $P\_{\text{graduação},c} = 1$, enquanto alu
 | 6                          | 3                        |
 | 7                          | 3                        |
 
-### Doutorado
+##### Equivalência de alunos de doutorado
 
-| Conceito do doutorado Capes | $P\_{\text{doutorado},c}$ |
+| Conceito do doutorado CAPES | $P\_{\text{doutorado},c}$ |
 |:----------------------------|:--------------------------|
-| 3                          | 1                          |
-| 4                          | 2                          |
-| 5                          | 3                          |
-| 6                          | 4                          |
-| 7                          | 5                          |
+| 3                           | 1                         |
+| 4                           | 2                         |
+| 5                           | 3                         |
+| 6                           | 4                         |
+| 7                           | 5                         |
 
-## Proporção de alunos
+### Proporção de alunos
 
-A proporção de alunos $\alpha$, $\beta$ e $\gamma$ são simplesmente o somatório do número de alunos, cujo curso é o mesmo do curso de solicitação da vaga na turma, **para aquela modalidade,**
-dividido pelo número de alunos, cujo curso é o mesmo do curso de solicitação da vaga na turma, **para todas as modalidades:**
+A proporção de alunos $\alpha$, $\beta$ e $\gamma$ são simplesmente o somatório do número de alunos, cujo curso é o 
+mesmo do curso de solicitação da vaga na turma, **para aquela modalidade,** dividido pelo número de alunos, cujo curso 
+é o mesmo do curso de solicitação da vaga na turma, **para todas as modalidades:**
+
+#### Graduação 
 
 $$
 \alpha = \frac{\sum\_{t}^{T\_{\text{graduação}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}}
 $$
 
+#### Mestrado
+
 $$
 \beta = \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}}
 $$
+
+#### Doutorado
 
 $$
 \gamma = \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}}
@@ -58,13 +78,15 @@ $$
 
 Onde:
 
-* $T\_{\text{graduação}}$, $T\_{\text{mestrado}}$ e $T\_{\text{doutorado}}$ são respectivamente o número de alunos de graduação, mestrado e doutorado, cujo curso é o mesmo curso de
-  solicitação de vaga na turma, para os quais o professor deu aula no ano analisado;
-* $\sum\_{t}^{T} N\_{c}^{(t)}$ são todos os alunos cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor deu aula no ano analisado.
+* $T\_{\text{graduação}}$, $T\_{\text{mestrado}}$ e $T\_{\text{doutorado}}$ são respectivamente o número de alunos de 
+  graduação, mestrado e doutorado, cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor
+  deu aula no ano analisado;
+* $\sum\_{t}^{T} N\_{c}^{(t)}$ são todos os alunos cujo curso é o mesmo curso de solicitação de vaga na turma, para os 
+  quais o professor deu aula no ano analisado.
 
-## Cálculo do IGC
+### Cálculo do IGC
 
-O cálculo do IGC do docente é simplesmente
+O cálculo do IGC do docente é dado por
 
 $$
 IGC\_{\text{docente}} = \alpha * \text{Media}\_{\text{graduação}} + \beta * \text{Media}\_{\text{mestrado}} + \gamma * \text{Media}\_{\text{doutorado}}
