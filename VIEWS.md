@@ -152,27 +152,30 @@ comment on table PAINEL_IGC_ALUNOS is 'Não usar em relatório do Power BI - é 
 CREATE OR REPLACE VIEW PAINEL_IGC_CONCEITOS as
 select leftie.*,
     case
-        when leftie.ANO_CONCEITO = rightie.ANO_MAIS_RECENTE then 1
-        else 0
+        when leftie.ANO_CONCEITO = rightie.ANO_MAIS_RECENTE then 1 else 0
     end as mais_recente
-from ((
-    select
-        ac.ID_CURSO, strip(ac.NOME_CURSO) NOME_CURSO,
-        NULL ID_PROGRAMA_SUCUPIRA, NULL NOME_PROGRAMA_SUCUPIRA,
-        NULL CONCEITO_CAPES_PROGRAMA_SUCUPIRA, acb.CPC_CONTINUO, acb.ANO ANO_CONCEITO
-    from ACAD_CURSOS ac
-    inner join ACAD_CPC_BRUTO acb on ac.COD_E_MEC = acb.COD_CURSO
-    where cpc_continuo is not null
-) union (
-    select
-        ac.ID_CURSO, strip(ac.NOME_CURSO) NOME_CURSO,
-        picp.ID_PROGRAMA_SUCUPIRA, strip(picp.NOME_PROGRAMA_SUCUPIRA) NOME_PROGRAMA_SUCUPIRA,
-        picp.CONCEITO_CAPES CONCEITO_CAPES_PROGRAMA_SUCUPIRA,
-        picp.CPC_CONTINUO, picp.ANO_CONCEITO
-    from ACAD_CURSOS ac
-    inner join PAINEL_IGC_CONCEITOS_POS picp on ac.ID_PROGRAMA_SUCUPIRA = picp.ID_PROGRAMA_SUCUPIRA
-    where CPC_CONTINUO is not null
-)) as leftie inner join (
+from (
+    (
+        select
+            ac.ID_CURSO, strip(ac.NOME_CURSO) NOME_CURSO,
+            NULL ID_PROGRAMA_SUCUPIRA, NULL NOME_PROGRAMA_SUCUPIRA,
+            NULL CONCEITO_CAPES_PROGRAMA_SUCUPIRA, picp.CPC_CONTINUO, picp.ANO_CONCEITO
+        from ACAD_CURSOS ac
+        inner join PAINEL_IGC_CONCEITOS_PREVIOS picp on ac.ID_CURSO = picp.ID_CURSO
+        where cpc_continuo is not null
+    ) union (
+        select
+            ac.ID_CURSO, strip(ac.NOME_CURSO) NOME_CURSO,
+            picp.ID_PROGRAMA_SUCUPIRA, strip(picp.NOME_PROGRAMA_SUCUPIRA) NOME_PROGRAMA_SUCUPIRA,
+            picp.CONCEITO_CAPES CONCEITO_CAPES_PROGRAMA_SUCUPIRA,
+            picp.CPC_CONTINUO, picp.ANO_CONCEITO
+        from ACAD_CURSOS ac
+        inner join PAINEL_IGC_CONCEITOS_POS picp on ac.ID_PROGRAMA_SUCUPIRA = picp.ID_PROGRAMA_SUCUPIRA
+        where CPC_CONTINUO is not null
+    )
+) as leftie
+inner join (
+    -- pega o ano mais recente do conceito para cada curso
     select pp.ID_CURSO, MAX(pp.ANO_CONCEITO) ANO_MAIS_RECENTE
     from PAINEL_IGC_CONCEITOS_PREVIOS pp
     group by pp.ID_CURSO
