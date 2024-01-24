@@ -10,6 +10,26 @@ utilizadas pelas views principais, e não devem constar em relatórios do Power 
 * `ID_DOCENTE`: idêntico a `ID_DOCENTE` no banco bee, que por sua vez é `ID_CONTRATO_RH` da tabela 
   `GERAL_SERVIDORES_UFSM`
 
+### Cursos ABI
+
+Os cursos de Graduação ABI (Área Básica de Ingresso) **não possuem** CPC Contínuo. Para tanto, se um docente lecionar
+apenas nestes cursos, não possuirá um valor de IGC.
+
+Para evitar que isso crie uma pressão indevida para que os docentes comecem a lecionar em cursos que possuem CPC, 
+deve-se tirar a média do CPC dos cursos subsequentes ao curso ABI, e usar essa média como o CPC do curso ABI. Esta média
+é calculada automaticamente na view [PAINEL_IGC_CONCEITOS_PREVIOS](#PAINEL_IGC_CONCEITOS_PREVIOS).
+
+Os cursos ABI da UFSM e seus respectivos ID_CURSO na tabela ACAD_CURSOS são:
+
+| ID_CURSO | COD_E_MEC | NOME_CURSO                               | Observação                  |
+|:---------|:----------|------------------------------------------|-----------------------------|
+| 686      | 5001111   | Ciências Biológicas - Núcleo Comum       | Curso ABI                   |
+| 688      | 45328     | Ciências Biológicas - Licenciatura Plena | Proveniente de ID_CURSO=686 |
+| 687      | 1113713   | Ciências Biológicas - Bacharelado        | Proveniente de ID_CURSO=686 |
+| 837      | 5001112   | Artes Cênicas - Bacharelado              | Curso ABI                   | 
+| 839      | 39137     | Artes Cênicas - Interpretação Teatral    | Proveniente de ID_CURSO=837 | 
+| 838      | 39136     | Artes Cênicas - Direção Teatral          | Proveniente de ID_CURSO=837 | 
+
 <details>
 <summary><h2>Tabelas tertiárias</h2></summary>
 
@@ -72,6 +92,22 @@ select * from (
     from ACAD_CURSOS ac
     inner join PAINEL_IGC_CONCEITOS_POS picp on ac.ID_PROGRAMA_SUCUPIRA = picp.ID_PROGRAMA_SUCUPIRA
     where CPC_CONTINUO is not null
+) UNION (
+    SELECT
+        686 AS ID_CURSO, 'Ciências Biológicas - Núcleo Comum' as NOME_CURSO,
+        AVG(ACB.CPC_CONTINUO) as CPC_CONTINUO, ACB.ANO
+    from ACAD_CPC_BRUTO ACB
+    INNER JOIN ACAD_CURSOS AC ON ACB.COD_CURSO = AC.COD_E_MEC
+    where AC.ID_CURSO in (688, 687)
+    group by ACB.ANO
+) UNION (
+    SELECT
+        837 AS ID_CURSO, 'Artes Cênicas - Bacharelado' as NOME_CURSO,
+        AVG(ACB.CPC_CONTINUO) as CPC_CONTINUO, ACB.ANO
+    from ACAD_CPC_BRUTO ACB
+    INNER JOIN ACAD_CURSOS AC ON ACB.COD_CURSO = AC.COD_E_MEC
+    where AC.ID_CURSO in (839, 838)
+    group by ACB.ANO
 );
 
 comment on table PAINEL_IGC_CONCEITOS_PREVIOS is 'Não usar em relatório do Power BI - é usada apenas como suporte para outras views. Para mais informações, consulte https://github.com/COPLIN-UFSM/IGC';
@@ -315,8 +351,7 @@ comment on table PAINEL_IGC_TURMAS is 'Tabela de fatos de turmas. Para mais info
 
 </details>
 
-<details>
-<summary><h2>Diagrama entidade-relacionamento das tabelas e views</h2></summary>
+## Diagrama entidade-relacionamento das tabelas e views
 
 ```mermaid
 %%{
@@ -407,5 +442,3 @@ classDiagram
       ENC_DIDATICO
     }
 ```
-</details>
-
