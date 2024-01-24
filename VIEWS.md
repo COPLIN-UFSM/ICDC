@@ -24,11 +24,11 @@ Os cursos ABI da UFSM e seus respectivos ID_CURSO na tabela ACAD_CURSOS são:
 | ID_CURSO | COD_E_MEC | NOME_CURSO                               | Observação                  |
 |:---------|:----------|------------------------------------------|-----------------------------|
 | 686      | 5001111   | Ciências Biológicas - Núcleo Comum       | Curso ABI                   |
-| 688      | 45328     | Ciências Biológicas - Licenciatura Plena | Proveniente de ID_CURSO=686 |
 | 687      | 1113713   | Ciências Biológicas - Bacharelado        | Proveniente de ID_CURSO=686 |
+| 688      | 45328     | Ciências Biológicas - Licenciatura Plena | Proveniente de ID_CURSO=686 |
 | 837      | 5001112   | Artes Cênicas - Bacharelado              | Curso ABI                   | 
-| 839      | 39137     | Artes Cênicas - Interpretação Teatral    | Proveniente de ID_CURSO=837 | 
 | 838      | 39136     | Artes Cênicas - Direção Teatral          | Proveniente de ID_CURSO=837 | 
+| 839      | 39137     | Artes Cênicas - Interpretação Teatral    | Proveniente de ID_CURSO=837 | 
 
 <details>
 <summary><h2>Tabelas tertiárias</h2></summary>
@@ -98,7 +98,7 @@ select * from (
         AVG(ACB.CPC_CONTINUO) as CPC_CONTINUO, ACB.ANO
     from ACAD_CPC_BRUTO ACB
     INNER JOIN ACAD_CURSOS AC ON ACB.COD_CURSO = AC.COD_E_MEC
-    where AC.ID_CURSO in (688, 687)
+    where AC.ID_CURSO in (687, 688)
     group by ACB.ANO
 ) UNION (
     SELECT
@@ -106,7 +106,7 @@ select * from (
         AVG(ACB.CPC_CONTINUO) as CPC_CONTINUO, ACB.ANO
     from ACAD_CPC_BRUTO ACB
     INNER JOIN ACAD_CURSOS AC ON ACB.COD_CURSO = AC.COD_E_MEC
-    where AC.ID_CURSO in (839, 838)
+    where AC.ID_CURSO in (838, 839)
     group by ACB.ANO
 );
 
