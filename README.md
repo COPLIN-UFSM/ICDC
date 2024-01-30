@@ -15,6 +15,7 @@ docentes...
 ## Documentação
 
 * Views do banco de dados utilizadas neste repositório: [VIEWS](VIEWS.md)
+* Painel do Power BI: [link](https://app.powerbi.com/groups/638db659-77f7-4e0f-a6b1-f21fba50e04b/reports/436e179d-49a4-4ddd-929e-593e2783b04a/ReportSectiona17c8f67e39001d10e3a?experience=power-bi&redirectedFromSignup=1&language=en-US)
 * Lógica do cálculo do IGC Docente: [IGC_DOCENTE](IGC_DOCENTE.md)
 * [Nota técnica IGC 2022](data/nota_técnica_igc.pdf)
 
