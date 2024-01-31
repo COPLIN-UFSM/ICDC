@@ -31,7 +31,7 @@ Os cursos ABI da UFSM e seus respectivos ID_CURSO na tabela ACAD_CURSOS são:
 | 839      | 39137     | Artes Cênicas - Interpretação Teatral    | Proveniente de ID_CURSO=837 | 
 
 <details>
-<summary><h2>Tabelas tertiárias</h2></summary>
+<summary><h2>Tabelas terciárias</h2></summary>
 
 * (Tabela) **ACAD_CPC_BRUTO:** Dados do CPC, com COD_CURSO como o ID do curso. Uma linha por curso/por ano
 * (View) **PAINEL_IGC_CONCEITOS_POS:** Dados de conceito CAPES, provenientes de uma coleta da Sucupira. Estão em tabelas 
