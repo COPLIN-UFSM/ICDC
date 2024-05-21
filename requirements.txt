@@ -1,9 +1,0 @@
-pip
-pandas
-numpy
-tqdm
-plotly
-dash
-scikit-learn
-scipy
-matplotlib

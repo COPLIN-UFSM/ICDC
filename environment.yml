@@ -1,0 +1,20 @@
+name: icdc
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - pip
+  - python=3.11.*
+  - jupyter=1.*
+  - scikit-learn=1.*
+  - scipy
+  - pandas=2.*
+  - numpy
+  - matplotlib=3.*
+  - dash=2.*
+  - plotly=5.*
+  - tqdm
+  - pip:
+      - ibm-db==3.1.4
+      - coplin-db2==1.*
+      - dash-bootstrap-components>=1.5.*
