@@ -29,29 +29,29 @@ docentes que lecionaram para turmas deste curso, ponderando-se pelo encargo did�
 pelo número de alunos na turma do curso que solicitou a disciplina, e também pelo peso de cada aluno em sala de aula. 
 
 A lógica do ICDC segue uma linha de raciocínio semelhante ao cálculo do [Índice Geral de Cursos](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/indicadores-de-qualidade-da-educacao-superior/indice-geral-de-cursos-igc),
-porém ponderando-se pelo encargo didático. Para maiores detalhes do cálculo do IGC, consulte a [nota técnica do ano 2022](data/nota_técnica_igc.pdf),
-utilizada como base para o ICDC. 
+porém ponderando-se pelo encargo didático. Para maiores detalhes do cálculo do IGC, consulte a 
+[nota técnica do ano 2022](data/nota_técnica_igc.pdf), utilizada como base para o ICDC. 
 
 ## Cálculo
 
 O ICDC possui diversas etapas de cálculo. Primeiro calcula-se a 
-[nota média por modalidade](#nota-média-por-modalidade) de ensino (graduação, mestrado, doutorado) - ou seja, o quão 
-bom o docente é para cada modalidade de ensino que esse leciona.
+[nota média por modalidade](#nota-média-por-modalidade) de ensino (graduação, mestrado, doutorado) - ou seja, o quanto o docente contribui
+na qualidade do curso, por modalidade lecionada.
 
-A nota por modalidade se encontra no intervalo entre 0 e 5, sendo zero a pior qualidade e cinco a melhor qualidade. 
+A nota por modalidade encontra-se no intervalo entre 0 e 5, sendo zero a pior qualidade e cinco a melhor qualidade. 
 Docentes que não lecionam em uma modalidade terão nota zero.
 
 A nota média por modalidade é ponderada pela [proporção de alunos](#proporção-de-alunos) daquela modalidade.
 
 O [Cálculo do ICDC](#cálculo-do-icdc) é simplesmente o somatório das notas médias por modalidade ponderadas pela 
-proporção de alunos por modalidade.
+proporção de alunos por modalidade. O ICDC também encontra-se no intervalo entre 0 e 5.
 
 ### Nota média por modalidade
 
 A nota média por modalidade (graduação, mestrado, doutorado) é dada por
 
 $$
-\text{Média}\_{m} = \frac{\sum\_{t}^{T \in m} (N\_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in m} (N_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)})}
+\text{Média}\_{m} = \frac{\sum\_{t}^{T \in m} (N\^{(t)} * P\_{m} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in m} (N^{(t)} * P\_{m} * \text{encargo}^{(t)})}
 $$
 
 Onde:
@@ -59,19 +59,19 @@ Onde:
 * $\text{Média}\_{m}$ é a nota média do docente na modalidade $m$ (graduação, mestrado ou doutorado);
 * $T$ é o conjunto de todas as turmas do docente para a modalidade $m$, para o ano calculado, sendo $t$ uma turma em 
   particular;
-* $P\_{m,c}$ é o [peso do discente](#relação-de-peso-de-alunos) para aquela modalidade, para aquele curso;
-* $N\_{c}^{(t)}$ é o número de alunos aprovados com nota, reprovados com nota, ou matriculados na disciplina, no ano do 
+* $P\_{m}$ é o [peso do discente](#relação-de-peso-de-alunos) para aquela modalidade, para o curso que solicitou a turma;
+* $N\^{(t)}$ é o número de alunos aprovados com nota, reprovados com nota, ou matriculados na disciplina, no ano do 
   cálculo;
 * $\text{encargo}^{(t)}$ é o encargo didático da turma;
-* $\text{CC}\_c^{(t)}$ é o conceito do curso: CPC contínuo mais recente para cursos de graduação, e Conceito CAPES mais
-  recente para cursos de pós-graduação
+* $\text{CC}^{(t)}$ é o conceito do curso da turma: CPC contínuo mais recente para cursos de graduação, e Conceito CAPES
+  mais recente para cursos de pós-graduação
 
 #### Relação de peso de alunos
 
 Segundo a [lógica do IGC](data/nota_técnica_igc.pdf), deve-se estabelecer uma relação de peso entre alunos de graduação
 e pós-graduação, nas modalidades de mestrado e doutorado, a depender do Conceito CAPES do programa de pós-graduação.
 
-Alunos de graduação sempre possuem peso $P\_{\text{graduação},c} = 1$, independente do CPC Contínuo do curso.
+Alunos de graduação sempre possuem peso $P\_{\text{graduação}} = 1$, independente do CPC Contínuo do curso.
 
 ##### Equivalência de alunos de mestrado
 
@@ -102,19 +102,19 @@ mesmo do curso de solicitação da vaga na turma, **para aquela modalidade,** di
 #### Graduação 
 
 $$
-\alpha = \frac{\sum\_{t}^{T\_{\text{graduação}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}}
+\alpha = \frac{\sum\_{t}^{T\_{\text{graduação}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}}
 $$
 
 #### Mestrado
 
 $$
-\beta = \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}}
+\beta = \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}}
 $$
 
 #### Doutorado
 
 $$
-\gamma = \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}}
+\gamma = \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}}
 $$
 
 Onde:
@@ -122,7 +122,7 @@ Onde:
 * $T\_{\text{graduação}}$, $T\_{\text{mestrado}}$ e $T\_{\text{doutorado}}$ são respectivamente o número de alunos de 
   graduação, mestrado e doutorado, cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor
   deu aula no ano do cálculo;
-* $\sum\_{t}^{T} N\_{c}^{(t)}$ são todos os alunos cujo curso é o mesmo curso de solicitação de vaga na turma, para os 
+* $\sum\_{t}^{T} N\^{(t)}$ são todos os alunos cujo curso é o mesmo curso de solicitação de vaga na turma, para os 
   quais o professor deu aula no ano analisado.
 
 ### Cálculo do ICDC
@@ -166,12 +166,12 @@ Como o docente João da Silva não leciona nenhuma disciplina no mestrado ou dou
 $\text{Média}\_{\text{mestrado}} = 0$ e $\text{Média}\_{\text{doutorado}} = 0$. Da mesma maneira, as proporções $\beta$ 
 e $\gamma$ do docente também serão zero.
 
-Considerando que o peso de alunos de graduação $P\_{\text{graduação},c}$ é sempre 1, independente da qualidade do curso 
-$c$, a nota média da graduação deste docente é 
+Considerando que o peso de alunos de graduação $P\_{\text{graduação}}$ é sempre 1, independente da qualidade do curso, 
+a nota média da graduação deste docente é 
 
 $$
 \begin{eqnarray}
-\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)})} \\
+\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
 & \\
 \text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 90 * 3.366) + (15 * 1 * 90 * 3.570)}{(20 * 1 * 90) + (15 * 1 * 90)} \\
 & \\
@@ -207,7 +207,7 @@ A nota média da graduação do docente João da Silva é
 
 $$
 \begin{eqnarray}
-\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)})} \\
+\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
 & \\
 \text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 30 * 3.366) + (15 * 1 * 90 * 3.570)}{(20 * 1 * 30) + (15 * 1 * 90)} \\
 & \\
@@ -221,7 +221,7 @@ A nota média da graduação do Docente Pedro Paulo é
 
 $$
 \begin{eqnarray}
-\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)})} \\
+\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
 & \\
 \text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 60 * 3.366)}{(20 * 1 * 60)} \\
 & \\
@@ -250,7 +250,7 @@ contabilizados no cálculo do ICDC.
 
 $$
 \begin{eqnarray}
-\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)})} \\
+\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
 & \\
 \text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 90 * 3.366)}{(20 * 1 * 90)} \\
 & \\
@@ -268,7 +268,7 @@ Como o Programa de Pós-Graduação em Química possui conceito CAPES 7, cada al
 
 $$
 \begin{eqnarray}
-\text{Média}\_{\text{mestrado}} =& \frac{\sum\_{t}^{T \in \text{mestrado}} (N\_{c}^{(t)} * P\_{\text{mestrado},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{mestrado}} (N_{c}^{(t)} * P\_{\text{mestrado},c} * \text{encargo}^{(t)})} \\
+\text{Média}\_{\text{mestrado}} =& \frac{\sum\_{t}^{T \in \text{mestrado}} (N\^{(t)} * P\_{\text{mestrado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{mestrado}} (N^{(t)} * P\_{\text{mestrado}} * \text{encargo}^{(t)})} \\
 & \\
 \text{Média}\_{\text{mestrado}} =& \frac{(5 * 3 * 60 * 7)}{(5 * 3 * 60)} \\
 & \\
@@ -286,7 +286,7 @@ Como o Programa de Pós-Graduação em Química possui conceito CAPES 7, cada al
 
 $$
 \begin{eqnarray}
-\text{Média}\_{\text{doutorado}} =& \frac{\sum\_{t}^{T \in \text{doutorado}} (N\_{c}^{(t)} * P\_{\text{doutorado},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{doutorado}} (N_{c}^{(t)} * P\_{\text{doutorado},c} * \text{encargo}^{(t)})} \\
+\text{Média}\_{\text{doutorado}} =& \frac{\sum\_{t}^{T \in \text{doutorado}} (N\^{(t)} * P\_{\text{doutorado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{doutorado}} (N^{(t)} * P\_{\text{doutorado}} * \text{encargo}^{(t)})} \\
 & \\
 \text{Média}\_{\text{doutorado}} =& \frac{(3 * 5 * 60 * 7)}{(3 * 5 * 60)} \\
 & \\
@@ -299,15 +299,15 @@ $$
 #### Proporções de alunos
 
 O docente leciona para 37 alunos no total, mas apenas 28 são de cursos ou programas que solicitaram as turmas. Portanto,
-seu número de alunos é $\sum\_{t}^{T} N\_{c}^{(t)} = 28$.
+seu número de alunos é $\sum\_{t}^{T} N\^{(t)} = 28$.
 
 $$
 \begin{eqnarray}
-\alpha &= \frac{\sum\_{t}^{T\_{\text{graduação}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} = \frac{20}{28} \approx 0.71 \\
+\alpha &= \frac{\sum\_{t}^{T\_{\text{graduação}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{20}{28} \approx 0.71 \\
 & \\
-\beta &= \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} = \frac{5}{28} \approx 0.18 \\
+\beta &= \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{5}{28} \approx 0.18 \\
 & \\
-\gamma &= \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} = \frac{3}{28} \approx 0.11
+\gamma &= \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{3}{28} \approx 0.11
 \end{eqnarray}
 $$
 
