@@ -185,11 +185,15 @@ $$
 & \\
 \text{Média}\_{\text{graduação}} =& \frac{10878.3}{3150} \\
 & \\
-\text{Média}\_{\text{graduação}} =& 3.453428571 = 3.45
+\text{Média}\_{\text{graduação}} =& 3.453428571 \approx 3.45
 \end{eqnarray}
 $$
 
-Como o docente leciona apenas na graduação, seu $\alpha$ será igual a 1. Portanto, o ICDC do docente João da Silva é
+O docente João da Silva possui 47 alunos no total, mas apenas 35 são do curso que solicitou as turmas nas 
+quais eles estudaram. Portanto, $$\sum\_{t}^{T} N\^{(t)} = (20 + 15) = 35$.
+
+Como o docente leciona apenas na graduação, seu $\alpha$ será $\alpha = \frac{35}{35} = 1$. Portanto, o ICDC do docente 
+João da Silva é
 
 $$
 \begin{eqnarray}
@@ -199,7 +203,7 @@ ICDC &= (1 * 3.45) + (0 * 0) + (0 * 0) \\
 \end{eqnarray}
 $$
 
-Que é simplesmente a \text{Média}\_{\text{graduação}}.
+Que é simplesmente a $\text{Média}\_{\text{graduação}}$.
 
 ### Exemplo 2: dois professores em uma disciplina
 
