@@ -269,10 +269,10 @@ turma, ao invés do **curso**.
 Alunos de graduação que cursam disciplinas de pós-graduação, bem como alunos especiais (e.g. servidores), **não são** 
 contabilizados no cálculo do ICDC.
 
-| Turma | Disciplina           | Modalidade    |    Encargo didático | Curso de solicitação da turma           | Conceito de Curso (CC) |                                                                Alunos |
-|:------|:---------------------|:--------------|--------------------:|:----------------------------------------|-----------------------:|----------------------------------------------------------------------:|
-| 10    | Cálculo A            | Graduação     | 90h (João da Silva) | Engenharia Química (Curso de Graduação) |                  3.366 |                          20 (Eng. Química); 7 (Ciência da Computação) |
-| 11    | Aprendizado Profundo | Pós-Graduação | 60h (João da Silva) | Química (Programa de Pós-Graduação)     |                      7 | 5 (Química - Mestrado); 3 (Química - Doutorado); 2 (alunos especiais) |
+| Turma | Disciplina                | Modalidade    |    Encargo didático | Curso de solicitação da turma           | Conceito de Curso (CC) |                                                                Alunos |
+|:------|:--------------------------|:--------------|--------------------:|:----------------------------------------|-----------------------:|----------------------------------------------------------------------:|
+| 10    | Cálculo A                 | Graduação     | 90h (João da Silva) | Engenharia Química (Curso de Graduação) |                  3.366 |                          20 (Eng. Química); 7 (Ciência da Computação) |
+| 11    | Método Científico e Ética | Pós-Graduação | 60h (João da Silva) | Química (Programa de Pós-Graduação)     |                      7 | 5 (Química - Mestrado); 3 (Química - Doutorado); 2 (alunos especiais) |
 
 
 #### Nota média da graduação

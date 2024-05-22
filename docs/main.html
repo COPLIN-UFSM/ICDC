@@ -86,40 +86,126 @@
     <div class="container">
         <div class="row">
             <div class="col board rounded p-4 mt-2 mb-2">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="prof-joao" id="prof-joao">
-                    <label class="form-check-label" for="prof-joao">Professor João</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="prof-joao" id="prof-pablo">
-                    <label class="form-check-label" for="prof-pablo">Professor Pablo</label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col board rounded p-4 mt-2 mb-2">
-                Turmas
-                <div class="row">
-                    <div class="col board rounded p-4 m-2">
-                        <div class="row">
-                            <div class="col">
-                                <dl class="row text-center text-md-start">
-                                    <dt class="col-12 col-md-3 texto cor-principal-escura">Curso</dt>
-                                    <dd class="col-12 col-md-9 texto cor-principal">Engenharia Elétrica</dd>
-
-                                    <dt class="col-12 col-md-3 texto cor-principal-escura">Disciplina</dt>
-                                    <dd class="col-12 col-md-9 texto cor-principal">Cálculo A</dd>
-                                </dl>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Turma</th>
+                        <th scope="col">Modalidade</th>
+                        <th scope="col">Encargo didático</th>
+                        <th scope="col">Conceito de Curso</th>
+                        <th scope="col">Alunos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <select class="form-select" aria-label="select-modalidade-0" id="select-modalidade-0">
+                                <option value="graduacao">Graduação</option>
+                                <option value="pos-graduacao">Pós-graduação</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="row mb-2">
+                                <div class="col-8">
+                                    <select class="form-select" aria-label="select-docente-0-0" id="select-docente-0">
+                                        <option value="joao" selected>João da Silva</option>
+                                        <option value="pedro">Pedro Paulo</option>
+                                        <option value="maria">Maria Abigail</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+<!--                                    <label for="input-encargo-0" class="form-label">Horas</label>-->
+                                    <input type="number" class="form-control" id="input-encargo-0-0" value="60">
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col board rounded p-4 m-2">
+                            <div class="row mb-2">
+                                <div class="col-8">
+                                    <select class="form-select" aria-label="select-docente-0" id="select-docente-0-1">
+                                        <option value="joao">João da Silva</option>
+                                        <option value="pedro" selected>Pedro Paulo</option>
+                                        <option value="maria">Maria Abigail</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+<!--                                    <label for="input-encargo-0" class="form-label">Horas</label>-->
+                                    <input type="number" class="form-control" id="input-encargo-0-1" value="30">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    CPC contínuo
+                                </div>
+                                <div class="col-8">
+                                    <input type="number" class="form-control" id="input-cpc-0" value="3.366">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    Conceito CAPES
+                                </div>
+                                <div class="col-8">
+                                    <input type="number" class="form-control" id="input-capes-0" value="0">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    Curso de solicitação
+                                </div>
+                                <div class="col-8">
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            Graduação
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="number" class="form-control" id="input-curso-solicitacao-graduacao-0" value="20">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            Mestrado
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="number" class="form-control" id="input-curso-solicitacao-mestrado-0" value="0">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            Doutorado
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="number" class="form-control" id="input-curso-solicitacao-doutorado-0" value="0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    Outros cursos
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" class="form-control" id="input-curso-outros-0" value="5">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
 
-                    </div>
-                    <div class="col board rounded p-4 m-2">
 
-                    </div>
-                </div>
+                </table>
+
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="checkbox" value="prof-joao" id="prof-joao">-->
+<!--                    <label class="form-check-label" for="prof-joao">Professor João</label>-->
+<!--                </div>-->
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="checkbox" value="prof-joao" id="prof-pablo">-->
+<!--                    <label class="form-check-label" for="prof-pablo">Professor Pablo</label>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
