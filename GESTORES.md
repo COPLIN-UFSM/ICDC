@@ -147,6 +147,11 @@ que derivam do núcleo comum.
 Como estes cursos não possuem nem CPC Contínuo, nem Conceito CAPES, eles não contribuem para o ICDC. Um professor que 
 leciona exclusivamente em cursos técnicos, por exemplo, terá ICDC = 0. 
 
+### Período de tempo de cálculo
+
+O ICDC pode ser apenas calculado a partir do ano de 2019, pois a informação de encargos didáticos anterior a este ano
+não está disponível.
+
 ## Exemplos
 
 ### Exemplo 1: um professor por disciplina
@@ -158,7 +163,8 @@ leciona exclusivamente em cursos técnicos, por exemplo, terá ICDC = 0.
  
 
 Como o docente João da Silva não leciona nenhuma disciplina no mestrado ou doutorado, 
-$\text{Média}\_{\text{mestrado}} = 0$ e $\text{Média}\_{\text{doutorado}} = 0$.
+$\text{Média}\_{\text{mestrado}} = 0$ e $\text{Média}\_{\text{doutorado}} = 0$. Da mesma maneira, as proporções $\beta$ 
+e $\gamma$ do docente também serão zero.
 
 Considerando que o peso de alunos de graduação $P\_{\text{graduação},c}$ é sempre 1, independente da qualidade do curso 
 $c$, a nota média da graduação deste docente é 
@@ -175,6 +181,18 @@ $$
 \end{eqnarray}
 $$
 
+Como o docente leciona apenas na graduação, seu $\alpha$ será igual a 1. Portanto, o ICDC do docente João da Silva é
+
+$$
+\begin{eqnarray}
+ICDC &= \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}} \\
+& \\
+ICDC &= (1 * 3.45) + (0 * 0) + (0 * 0) \\
+\end{eqnarray}
+$$
+
+Que é simplesmente a \text{Média}\_{\text{graduação}}.
+
 ### Exemplo 2: dois professores em uma disciplina
 
 Algumas disciplinas são lecionadas por mais de um docente. Para estes casos, considera-se apenas o encargo didático do
@@ -185,7 +203,7 @@ docente nas disciplinas.
 | 10    | Cálculo A  | Graduação  | 30h (João da Silva); 60h (Pedro Paulo) | Engenharia Química            |                        3.366 | 20 (Eng. Química); 7 (Ciência da Computação) |
 | 11    | Cálculo B  | Graduação  |                    90h (João da Silva) | Engenharia Civil              |                        3.570 |            15 (Eng. Civil); 5 (Eng. Química) |
 
-O ICDC do docente João da Silva é
+A nota média da graduação do docente João da Silva é
 
 $$
 \begin{eqnarray}
@@ -199,7 +217,7 @@ $$
 \end{eqnarray}
 $$
 
-Já o ICDC do Docente Pedro Paulo é
+A nota média da graduação do Docente Pedro Paulo é
 
 $$
 \begin{eqnarray}
@@ -219,3 +237,101 @@ Cursos de pós-graduação frequentemente possuem turmas mistas, onde uma mesma 
 mestrado e doutorado do mesmo Programa de Pós-Graduação. Nesse caso, considera-se o **programa** de solicitação da 
 turma, ao invés do **curso**.
 
+Alunos de graduação que cursam disciplinas de pós-graduação, bem como alunos especiais (e.g. servidores), **não são** 
+contabilizados no cálculo do ICDC.
+
+| Turma | Disciplina           | Modalidade    |    Encargo didático | Curso de solicitação da turma           | Conceito de Curso (CC) |                                                                Alunos |
+|:------|:---------------------|:--------------|--------------------:|:----------------------------------------|-----------------------:|----------------------------------------------------------------------:|
+| 10    | Cálculo A            | Graduação     | 90h (João da Silva) | Engenharia Química (Curso de Graduação) |                  3.366 |                          20 (Eng. Química); 7 (Ciência da Computação) |
+| 11    | Aprendizado Profundo | Pós-Graduação | 60h (João da Silva) | Química (Programa de Pós-Graduação)     |                      7 | 5 (Química - Mestrado); 3 (Química - Doutorado); 2 (alunos especiais) |
+
+
+#### Nota média da graduação
+
+$$
+\begin{eqnarray}
+\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)})} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 90 * 3.366)}{(20 * 1 * 90)} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{6058.8}{1800} \\
+& \\
+\text{Média}\_{\text{graduação}} =& 3.366
+\end{eqnarray}
+$$
+
+#### Nota média do mestrado
+
+Segue-se a tabela de equivalência da [Seção Equivalência de Alunos de Mestrado](#equivalência-de-alunos-de-mestrado).
+Como o Programa de Pós-Graduação em Química possui conceito CAPES 7, cada aluno de mestrado deste programa equivale a 
+3 alunos de graduação: 
+
+$$
+\begin{eqnarray}
+\text{Média}\_{\text{mestrado}} =& \frac{\sum\_{t}^{T \in \text{mestrado}} (N\_{c}^{(t)} * P\_{\text{mestrado},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{mestrado}} (N_{c}^{(t)} * P\_{\text{mestrado},c} * \text{encargo}^{(t)})} \\
+& \\
+\text{Média}\_{\text{mestrado}} =& \frac{(5 * 3 * 60 * 7)}{(5 * 3 * 60)} \\
+& \\
+\text{Média}\_{\text{mestrado}} =& \frac{6300}{900} \\
+& \\
+\text{Média}\_{\text{mestrado}} =& 7
+\end{eqnarray}
+$$
+
+#### Nota média do doutorado
+
+Segue-se a tabela de equivalência da [Seção Equivalência de Alunos de Doutorado](#equivalência-de-alunos-de-doutorado).
+Como o Programa de Pós-Graduação em Química possui conceito CAPES 7, cada aluno de doutorado deste programa equivale a 
+5 alunos de graduação: 
+
+$$
+\begin{eqnarray}
+\text{Média}\_{\text{doutorado}} =& \frac{\sum\_{t}^{T \in \text{doutorado}} (N\_{c}^{(t)} * P\_{\text{doutorado},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{doutorado}} (N_{c}^{(t)} * P\_{\text{doutorado},c} * \text{encargo}^{(t)})} \\
+& \\
+\text{Média}\_{\text{doutorado}} =& \frac{(3 * 5 * 60 * 7)}{(3 * 5 * 60)} \\
+& \\
+\text{Média}\_{\text{doutorado}} =& \frac{6300}{900} \\
+& \\
+\text{Média}\_{\text{doutorado}} =& 7
+\end{eqnarray}
+$$
+
+#### Proporções $\alpha$, $\beta$ e $\gamma$
+
+O docente leciona para 37 alunos no total, mas apenas 28 são de cursos ou programas que solicitaram as turmas. Portanto,
+seu número de alunos é $\sum\_{t}^{T} N\_{c}^{(t)} = 28$.
+
+$$
+\begin{eqnarray}
+\alpha &= \frac{\sum\_{t}^{T\_{\text{graduação}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} \\
+& \\
+\alpha &= \frac{20}{28} \approx 0.71
+\end{eqnarray}
+$$
+
+$$
+\beta &= \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} \\
+& \\
+\beta &= \frac{5}{28} \approx 0.18
+\end{eqnarray}
+$$
+
+$$
+\gamma &= \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} \\
+& \\
+\gamma &= \frac{3}{28} \approx 0.11
+\end{eqnarray}
+$$
+
+#### ICDC
+
+Para este exemplo, o ICDC do docente João da Silva é
+
+$$
+\begin{eqnarray}
+ICDC &= \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}} \\
+& \\
+ICDC &= (0.71 * 3.366) + (0.18 * 7) + (0.11 * 7) \\
+ICDC &= 4.41986 
+\end{eqnarray}
+$$
