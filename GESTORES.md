@@ -194,15 +194,15 @@ Considerando que o peso de alunos de graduação $P\_{\text{graduação}}$ é se
 a nota média da graduação deste docente é 
 
 $$
-\begin{eqnarray}
-\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
+\begin{aligned}
+\text{Média}\_{\text{graduação}} &= \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 90 * 3.366) + (15 * 1 * 90 * 3.570)}{(20 * 1 * 90) + (15 * 1 * 90)} \\
+\text{Média}\_{\text{graduação}} &= \frac{(20 * 1 * 90 * 3.366) + (15 * 1 * 90 * 3.570)}{(20 * 1 * 90) + (15 * 1 * 90)} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{10878.3}{3150} \\
+\text{Média}\_{\text{graduação}} &= \frac{10878.3}{3150} \\
 & \\
-\text{Média}\_{\text{graduação}} =& 3.453428571 \approx 3.45
-\end{eqnarray}
+\text{Média}\_{\text{graduação}} &= 3.453428571 \approx 3.45
+\end{aligned}
 $$
 
 O docente João da Silva possui 47 alunos no total, mas apenas 35 são do curso que solicitou as turmas nas 
@@ -213,12 +213,13 @@ Como o docente leciona apenas na graduação, seu $\alpha$ será $\alpha = \frac
 O ICDC do docente João da Silva é
 
 $$
-\begin{eqnarray}
+\begin{aligned}
 ICDC &= \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}} \\
 & \\
 ICDC &= (1 * 3.45) + (0 * 0) + (0 * 0) \\
-ICDC &= 3.45 \\
-\end{eqnarray}
+& \\
+ICDC &= 3.45
+\end{aligned}
 $$
 
 ### Exemplo 2: dois professores em uma disciplina
@@ -234,29 +235,29 @@ respectivo a cada docente, para cada disciplina.
 A nota média da graduação do docente **João da Silva** é
 
 $$
-\begin{eqnarray}
-\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
+\begin{aligned}
+\text{Média}\_{\text{graduação}} &= \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 30 * 3.366) + (15 * 1 * 90 * 3.570)}{(20 * 1 * 30) + (15 * 1 * 90)} \\
+\text{Média}\_{\text{graduação}} &= \frac{(20 * 1 * 30 * 3.366) + (15 * 1 * 90 * 3.570)}{(20 * 1 * 30) + (15 * 1 * 90)} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{6839.1}{1950} \\
+\text{Média}\_{\text{graduação}} &= \frac{6839.1}{1950} \\
 & \\
-\text{Média}\_{\text{graduação}} =& 3.507230769 \approx 3.51
-\end{eqnarray}
+\text{Média}\_{\text{graduação}} &= 3.507230769 \approx 3.51
+\end{aligned}
 $$
 
 A nota média da graduação do docente **Pedro Paulo** é
 
 $$
-\begin{eqnarray}
-\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
+\begin{aligned}
+\text{Média}\_{\text{graduação}} &= \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 60 * 3.366)}{(20 * 1 * 60)} \\
+\text{Média}\_{\text{graduação}} &= \frac{(20 * 1 * 60 * 3.366)}{(20 * 1 * 60)} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{4039.2}{1200} \\
+\text{Média}\_{\text{graduação}} &= \frac{4039.2}{1200} \\
 & \\
-\text{Média}\_{\text{graduação}} =& 3.366
-\end{eqnarray}
+\text{Média}\_{\text{graduação}} &= 3.366
+\end{aligned}
 $$
 
 ### Exemplo 3: cursos de pós-graduação
@@ -277,15 +278,15 @@ contabilizados no cálculo do ICDC.
 #### Nota média da graduação
 
 $$
-\begin{eqnarray}
-\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
+\begin{aligned}
+\text{Média}\_{\text{graduação}} &= \frac{\sum\_{t}^{T \in \text{graduação}} (N\^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N^{(t)} * P\_{\text{graduação}} * \text{encargo}^{(t)})} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 90 * 3.366)}{(20 * 1 * 90)} \\
+\text{Média}\_{\text{graduação}} &= \frac{(20 * 1 * 90 * 3.366)}{(20 * 1 * 90)} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{6058.8}{1800} \\
+\text{Média}\_{\text{graduação}} &= \frac{6058.8}{1800} \\
 & \\
-\text{Média}\_{\text{graduação}} =& 3.366
-\end{eqnarray}
+\text{Média}\_{\text{graduação}} &= 3.366
+\end{aligned}
 $$
 
 #### Nota média do mestrado
@@ -295,15 +296,15 @@ Como o Programa de Pós-Graduação em Química possui conceito CAPES 7, cada al
 3 alunos de graduação: 
 
 $$
-\begin{eqnarray}
-\text{Média}\_{\text{mestrado}} =& \frac{\sum\_{t}^{T \in \text{mestrado}} (N\^{(t)} * P\_{\text{mestrado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{mestrado}} (N^{(t)} * P\_{\text{mestrado}} * \text{encargo}^{(t)})} \\
+\begin{aligned}
+\text{Média}\_{\text{mestrado}} &= \frac{\sum\_{t}^{T \in \text{mestrado}} (N\^{(t)} * P\_{\text{mestrado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{mestrado}} (N^{(t)} * P\_{\text{mestrado}} * \text{encargo}^{(t)})} \\
 & \\
-\text{Média}\_{\text{mestrado}} =& \frac{(5 * 3 * 60 * 7)}{(5 * 3 * 60)} \\
+\text{Média}\_{\text{mestrado}} &= \frac{(5 * 3 * 60 * 7)}{(5 * 3 * 60)} \\
 & \\
-\text{Média}\_{\text{mestrado}} =& \frac{6300}{900} \\
+\text{Média}\_{\text{mestrado}} &= \frac{6300}{900} \\
 & \\
-\text{Média}\_{\text{mestrado}} =& 7
-\end{eqnarray}
+\text{Média}\_{\text{mestrado}} &= 7
+\end{aligned}
 $$
 
 #### Nota média do doutorado
@@ -313,15 +314,15 @@ Como o Programa de Pós-Graduação em Química possui conceito CAPES 7, cada al
 5 alunos de graduação: 
 
 $$
-\begin{eqnarray}
-\text{Média}\_{\text{doutorado}} =& \frac{\sum\_{t}^{T \in \text{doutorado}} (N\^{(t)} * P\_{\text{doutorado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{doutorado}} (N^{(t)} * P\_{\text{doutorado}} * \text{encargo}^{(t)})} \\
+\begin{aligned}
+\text{Média}\_{\text{doutorado}} &= \frac{\sum\_{t}^{T \in \text{doutorado}} (N\^{(t)} * P\_{\text{doutorado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{doutorado}} (N^{(t)} * P\_{\text{doutorado}} * \text{encargo}^{(t)})} \\
 & \\
-\text{Média}\_{\text{doutorado}} =& \frac{(3 * 5 * 60 * 7)}{(3 * 5 * 60)} \\
+\text{Média}\_{\text{doutorado}} &= \frac{(3 * 5 * 60 * 7)}{(3 * 5 * 60)} \\
 & \\
-\text{Média}\_{\text{doutorado}} =& \frac{6300}{900} \\
+\text{Média}\_{\text{doutorado}} &= \frac{6300}{900} \\
 & \\
-\text{Média}\_{\text{doutorado}} =& 7
-\end{eqnarray}
+\text{Média}\_{\text{doutorado}} &= 7
+\end{aligned}
 $$
 
 #### Proporções de alunos
@@ -330,13 +331,13 @@ O docente leciona para 37 alunos no total, mas apenas 28 são de cursos ou progr
 seu número de alunos é $\sum\_{t}^{T} N\^{(t)} = 28$.
 
 $$
-\begin{eqnarray}
+\begin{aligned}
 \alpha &= \frac{\sum\_{t}^{T\_{\text{graduação}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{20}{28} \approx 0.71 \\
 & \\
 \beta &= \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{5}{28} \approx 0.18 \\
 & \\
 \gamma &= \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{3}{28} \approx 0.11
-\end{eqnarray}
+\end{aligned}
 $$
 
 #### ICDC
@@ -344,10 +345,11 @@ $$
 Para este exemplo, o ICDC do docente João da Silva é
 
 $$
-\begin{eqnarray}
+\begin{aligned}
 ICDC &= \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}} \\
 & \\
 ICDC &= (0.71 * 3.366) + (0.18 * 7) + (0.11 * 7) \\
+& \\
 ICDC &= 4.41986 
-\end{eqnarray}
+\end{aligned}
 $$
