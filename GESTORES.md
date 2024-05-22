@@ -19,23 +19,22 @@ Este documento detalha a lógica de cálculo do **Índice de Contribuição Doce
 
 ## Proposta
 
-A proposta do ICDC é compor um índice em que seja possível mensurar a contribuição do docente na nota do 
-[Conceito Preliminar de Curso (CPC)](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/indicadores-de-qualidade-da-educacao-superior/conceito-preliminar-de-curso-cpc),
-que por sua vez é utilizado no [Índice Geral de Curso (IGC)](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/indicadores-de-qualidade-da-educacao-superior/indice-geral-de-cursos-igc).
+A proposta do ICDC é compor um índice em que seja possível mensurar a contribuição **indireta** do docente na nota do 
+[Conceito Preliminar de Curso (CPC)](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/indicadores-de-qualidade-da-educacao-superior/conceito-preliminar-de-curso-cpc)
+(graduação) e no [Conceito CAPES](https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/avaliacao/sobre-a-avaliacao/avaliacao-o-que-e/sobre-a-avaliacao-conceitos-processos-e-normas/conceito-avaliacao) (pós-graduação).
 
-A propriedade distributiva do ICDC é seu aspecto mais importante. Com base na nota do CPC contínuo (graduação) ou 
-[Conceito CAPES](https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/avaliacao/sobre-a-avaliacao/avaliacao-o-que-e/sobre-a-avaliacao-conceitos-processos-e-normas/conceito-avaliacao) 
-(pós-graduação) de cada curso, distribui-se esta nota para todos os docentes que lecionaram para turmas deste curso, 
-ponderando-se pelo encargo didático (tempo lecionando) de cada docente, pelo número de alunos na turma do curso que 
-solicitou a disciplina, e também pelo peso de cada aluno em sala de aula. 
+A propriedade distributiva do ICDC é seu aspecto mais importante. Com base na nota do Conceito de Curso (CC), que é 
+o CPC contínuo (graduação) ou Conceito CAPES (pós-graduação) de cada curso, distribui-se esta nota para todos os 
+docentes que lecionaram para turmas deste curso, ponderando-se pelo encargo didático (tempo lecionando) de cada docente, 
+pelo número de alunos na turma do curso que solicitou a disciplina, e também pelo peso de cada aluno em sala de aula. 
 
-A lógica do ICDC segue uma linha de raciocínio semelhante ao cálculo do Índice Geral de Cursos, porém com a ponderação
-por encargo didático. A nota técnica do IGC do ano de 2022 está [aqui](data/nota_técnica_igc.pdf).
-O cálculo do IGC por docente segue a mesma linha de raciocínio, porém utilizando dados de turmas e encargos.
+A lógica do ICDC segue uma linha de raciocínio semelhante ao cálculo do [Índice Geral de Cursos](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/indicadores-de-qualidade-da-educacao-superior/indice-geral-de-cursos-igc),
+porém ponderando-se pelo encargo didático. Para maiores detalhes do cálculo do IGC, consulte a [nota técnica do ano 2022](data/nota_técnica_igc.pdf),
+utilizada como base para o ICDC. 
 
 ## Cálculo
 
-O cálculo do ICDC, à semelhança do IGC, segue diversas etapas. Primeiro calcula-se a 
+O ICDC possui diversas etapas de cálculo. Primeiro calcula-se a 
 [nota média por modalidade](#nota-média-por-modalidade) de ensino (graduação, mestrado, doutorado) - ou seja, o quão 
 bom o docente é para cada modalidade de ensino que esse leciona.
 
@@ -134,20 +133,34 @@ $$
 ICDC = \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}}
 $$
 
+## Casos especiais
+
+### Cursos ABI (Área Básica de Ingresso)
+
+Para cursos ABI (Área Básica de Ingresso), em que o aluno ingressa em um curso básico e depois faz a opção por um curso
+específico (por exemplo, Ciência Biológicas), o núcleo comum não possui um CPC Contínuo pois nenhum aluno se forma neste
+curso. Portanto, para calcular o CPC Contínuo do núcleo comum, tira-se simplesmente a média do CPC dos cursos 
+que derivam do núcleo comum.
+
+### Cursos técnicos, ensino médio, e educação básica
+
+Como estes cursos não possuem nem CPC Contínuo, nem Conceito CAPES, eles não contribuem para o ICDC. Um professor que 
+leciona exclusivamente em cursos técnicos, por exemplo, terá ICDC = 0. 
+
 ## Exemplos
 
-### Exemplo 1: um professor 
+### Exemplo 1: um professor por disciplina
 
-| Turma | Disciplina | Modalidade | Docentes          | Encargo didático | Curso de solicitação da turma |       Conceito de Curso (CC) |                                       Alunos |
-|:------|:-----------|:-----------|:------------------|-----------------:|:------------------------------|-----------------------------:|---------------------------------------------:|
-| 10    | Cálculo A  | Graduação  | 1 (João da Silva) |              90h | Engenharia Química            |                        3.366 | 20 (Eng. Química); 7 (Ciência da Computação) |
-| 11    | Cálculo B  | Graduação  | 1 (João da Silva) |              90h | Engenharia Civil              |                        3.570 |            15 (Eng. Civil); 5 (Eng. Química) |
+| Turma | Disciplina | Modalidade |    Encargo didático | Curso de solicitação da turma |       Conceito de Curso (CC) |                                       Alunos |
+|:------|:-----------|:-----------|--------------------:|:------------------------------|-----------------------------:|---------------------------------------------:|
+| 10    | Cálculo A  | Graduação  | 90h (João da Silva) | Engenharia Química            |                        3.366 | 20 (Eng. Química); 7 (Ciência da Computação) |
+| 11    | Cálculo B  | Graduação  | 90h (João da Silva) | Engenharia Civil              |                        3.570 |            15 (Eng. Civil); 5 (Eng. Química) |
  
 
 Como o docente João da Silva não leciona nenhuma disciplina no mestrado ou doutorado, 
 $\text{Média}\_{\text{mestrado}} = 0$ e $\text{Média}\_{\text{doutorado}} = 0$.
 
-Considerando que o peso de alunos de graduação P\_{\text{graduação},c} é sempre 1, independente da qualidade do curso 
+Considerando que o peso de alunos de graduação $P\_{\text{graduação},c}$ é sempre 1, independente da qualidade do curso 
 $c$, a nota média da graduação deste docente é 
 
 $$
@@ -158,8 +171,51 @@ $$
 & \\
 \text{Média}\_{\text{graduação}} =& \frac{10878.3}{3150} \\
 & \\
-\text{Média}\_{\text{graduação}} =& \frac{10878.3}{3150} \\
-& \\
 \text{Média}\_{\text{graduação}} =& 3.453428571 = 3.45
 \end{eqnarray}
 $$
+
+### Exemplo 2: dois professores em uma disciplina
+
+Algumas disciplinas são lecionadas por mais de um docente. Para estes casos, considera-se apenas o encargo didático do
+docente nas disciplinas.
+
+| Turma | Disciplina | Modalidade |                       Encargo didático | Curso de solicitação da turma |       Conceito de Curso (CC) |                                       Alunos |
+|:------|:-----------|:-----------|---------------------------------------:|:------------------------------|-----------------------------:|---------------------------------------------:|
+| 10    | Cálculo A  | Graduação  | 30h (João da Silva); 60h (Pedro Paulo) | Engenharia Química            |                        3.366 | 20 (Eng. Química); 7 (Ciência da Computação) |
+| 11    | Cálculo B  | Graduação  |                    90h (João da Silva) | Engenharia Civil              |                        3.570 |            15 (Eng. Civil); 5 (Eng. Química) |
+
+O ICDC do docente João da Silva é
+
+$$
+\begin{eqnarray}
+\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)})} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 30 * 3.366) + (15 * 1 * 90 * 3.570)}{(20 * 1 * 30) + (15 * 1 * 90)} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{6839.1}{1950} \\
+& \\
+\text{Média}\_{\text{graduação}} =& 3.507230769 \approx 3.51
+\end{eqnarray}
+$$
+
+Já o ICDC do Docente Pedro Paulo é
+
+$$
+\begin{eqnarray}
+\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)})} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 60 * 3.366)}{(20 * 1 * 60)} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{4039.2}{1200} \\
+& \\
+\text{Média}\_{\text{graduação}} =& 3.366
+\end{eqnarray}
+$$
+
+### Exemplo 3: cursos de pós-graduação
+
+Cursos de pós-graduação frequentemente possuem turmas mistas, onde uma mesma disciplina é lecionada para alunos de 
+mestrado e doutorado do mesmo Programa de Pós-Graduação. Nesse caso, considera-se o **programa** de solicitação da 
+turma, ao invés do **curso**.
+
