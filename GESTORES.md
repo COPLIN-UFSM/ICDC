@@ -2,13 +2,28 @@
 
 Este documento detalha a lógica de cálculo do **Índice de Contribuição Docente na Qualidade do Curso**, ou **ICDC.**
 
+## Sumário 
+
+  * [Proposta](#proposta)
+  * [Cálculo](#cálculo)
+    * [Nota média por modalidade](#nota-média-por-modalidade)
+      * [Relação de peso de alunos](#relação-de-peso-de-alunos)
+        * [Equivalência de alunos de mestrado](#equivalência-de-alunos-de-mestrado)
+        * [Equivalência de alunos de doutorado](#equivalência-de-alunos-de-doutorado)
+    * [Proporção de alunos](#proporção-de-alunos)
+      * [Graduação](#graduação-)
+      * [Mestrado](#mestrado)
+      * [Doutorado](#doutorado)
+    * [Cálculo do ICDC](#cálculo-do-icdc)
+  * [Exemplos](#exemplos)
+
 ## Proposta
 
 A proposta do ICDC é compor um índice em que seja possível mensurar a contribuição do docente na nota do 
 [Conceito Preliminar de Curso (CPC)](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/indicadores-de-qualidade-da-educacao-superior/conceito-preliminar-de-curso-cpc),
 que por sua vez é utilizado no [Índice Geral de Curso (IGC)](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/indicadores-de-qualidade-da-educacao-superior/indice-geral-de-cursos-igc).
 
-A propriedade distributiva do ICDC é seu aspecto mais importante. Com base na nota do CPC (graduação) ou 
+A propriedade distributiva do ICDC é seu aspecto mais importante. Com base na nota do CPC contínuo (graduação) ou 
 [Conceito CAPES](https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/avaliacao/sobre-a-avaliacao/avaliacao-o-que-e/sobre-a-avaliacao-conceitos-processos-e-normas/conceito-avaliacao) 
 (pós-graduação) de cada curso, distribui-se esta nota para todos os docentes que lecionaram para turmas deste curso, 
 ponderando-se pelo encargo didático (tempo lecionando) de cada docente, pelo número de alunos na turma do curso que 
@@ -37,19 +52,20 @@ proporção de alunos por modalidade.
 A nota média por modalidade (graduação, mestrado, doutorado) é dada por
 
 $$
-\text{Media}\_{m} = \frac{\sum\_{t}^{T \in m} (N\_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)} * \text{CPC}\_c^{(t)})}{\sum\_{t}^{T \in m} (N_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)})}
+\text{Média}\_{m} = \frac{\sum\_{t}^{T \in m} (N\_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in m} (N_{c}^{(t)} * P\_{m,c} * \text{encargo}^{(t)})}
 $$
 
 Onde:
 
-* $\text{Media}\_{m}$ é a nota média do docente na modalidade $m$ (graduação, mestrado ou doutorado);
+* $\text{Média}\_{m}$ é a nota média do docente na modalidade $m$ (graduação, mestrado ou doutorado);
 * $T$ é o conjunto de todas as turmas do docente para a modalidade $m$, para o ano calculado, sendo $t$ uma turma em 
   particular;
 * $P\_{m,c}$ é o [peso do discente](#relação-de-peso-de-alunos) para aquela modalidade, para aquele curso;
 * $N\_{c}^{(t)}$ é o número de alunos aprovados com nota, reprovados com nota, ou matriculados na disciplina, no ano do 
   cálculo;
 * $\text{encargo}^{(t)}$ é o encargo didático da turma;
-* $\text{CPC}\_c^{(t)}$ é o CPC contínuo mais recente para o curso de solicitação da vaga na turma.
+* $\text{CC}\_c^{(t)}$ é o conceito do curso: CPC contínuo mais recente para cursos de graduação, e Conceito CAPES mais
+  recente para cursos de pós-graduação
 
 #### Relação de peso de alunos
 
@@ -115,5 +131,35 @@ Onde:
 O cálculo do ICDC é dado por
 
 $$
-ICDC = \alpha * \text{Media}\_{\text{graduação}} + \beta * \text{Media}\_{\text{mestrado}} + \gamma * \text{Media}\_{\text{doutorado}}
+ICDC = \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}}
+$$
+
+## Exemplos
+
+### Exemplo 1: um professor 
+
+| Turma | Disciplina | Modalidade | Docentes          | Encargo didático | Curso de solicitação da turma |       Conceito de Curso (CC) |                                       Alunos |
+|:------|:-----------|:-----------|:------------------|-----------------:|:------------------------------|-----------------------------:|---------------------------------------------:|
+| 10    | Cálculo A  | Graduação  | 1 (João da Silva) |              90h | Engenharia Química            |                        3.366 | 20 (Eng. Química); 7 (Ciência da Computação) |
+| 11    | Cálculo B  | Graduação  | 1 (João da Silva) |              90h | Engenharia Civil              |                        3.570 |            15 (Eng. Civil); 5 (Eng. Química) |
+ 
+
+Como o docente João da Silva não leciona nenhuma disciplina no mestrado ou doutorado, 
+$\text{Média}\_{\text{mestrado}} = 0$ e $\text{Média}\_{\text{doutorado}} = 0$.
+
+Considerando que o peso de alunos de graduação P\_{\text{graduação},c} é sempre 1, independente da qualidade do curso 
+$c$, a nota média da graduação deste docente é 
+
+$$
+\begin{eqnarray}
+\text{Média}\_{\text{graduação}} =& \frac{\sum\_{t}^{T \in \text{graduação}} (N\_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)} * \text{CC}\_c^{(t)})}{\sum\_{t}^{T \in \text{graduação}} (N_{c}^{(t)} * P\_{\text{graduação},c} * \text{encargo}^{(t)})} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{(20 * 1 * 90 * 3.366) + (15 * 1 * 90 * 3.570)}{(20 * 1 * 90) + (15 * 1 * 90)} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{10878.3}{3150} \\
+& \\
+\text{Média}\_{\text{graduação}} =& \frac{10878.3}{3150} \\
+& \\
+\text{Média}\_{\text{graduação}} =& 3.453428571 = 3.45
+\end{eqnarray}
 $$
