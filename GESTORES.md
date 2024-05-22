@@ -296,30 +296,18 @@ $$
 \end{eqnarray}
 $$
 
-#### Proporções $\alpha$, $\beta$ e $\gamma$
+#### Proporções de alunos
 
 O docente leciona para 37 alunos no total, mas apenas 28 são de cursos ou programas que solicitaram as turmas. Portanto,
 seu número de alunos é $\sum\_{t}^{T} N\_{c}^{(t)} = 28$.
 
 $$
 \begin{eqnarray}
-\alpha &= \frac{\sum\_{t}^{T\_{\text{graduação}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} \\
+\alpha &= \frac{\sum\_{t}^{T\_{\text{graduação}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} = \frac{20}{28} \approx 0.71 \\
 & \\
-\alpha &= \frac{20}{28} \approx 0.71
-\end{eqnarray}
-$$
-
-$$
-\beta &= \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} \\
+\beta &= \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} = \frac{5}{28} \approx 0.18 \\
 & \\
-\beta &= \frac{5}{28} \approx 0.18
-\end{eqnarray}
-$$
-
-$$
-\gamma &= \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} \\
-& \\
-\gamma &= \frac{3}{28} \approx 0.11
+\gamma &= \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\_{c}^{(t)}}{\sum\_{t}^{T} N\_{c}^{(t)}} = \frac{3}{28} \approx 0.11
 \end{eqnarray}
 $$
 
