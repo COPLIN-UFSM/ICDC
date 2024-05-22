@@ -11,7 +11,7 @@ Este documento detalha a lógica de cálculo do **Índice de Contribuição Doce
       * [Equivalência de alunos de mestrado](#equivalência-de-alunos-de-mestrado)
       * [Equivalência de alunos de doutorado](#equivalência-de-alunos-de-doutorado)
   * [Proporção de alunos](#proporção-de-alunos)
-    * [Graduação](#graduação-)
+    * [Graduação](#graduação)
     * [Mestrado](#mestrado)
     * [Doutorado](#doutorado)
   * [Cálculo do ICDC](#cálculo-do-icdc)
@@ -72,7 +72,23 @@ Onde:
   cálculo;
 * $\text{encargo}^{(t)}$ é o encargo didático da turma;
 * $\text{CC}^{(t)}$ é o conceito do curso da turma: CPC contínuo mais recente para cursos de graduação, e Conceito CAPES
-  mais recente para cursos de pós-graduação
+  mais recente para cursos de pós-graduação.
+
+> [!NOTE]
+> **Por que apenas alunos do mesmo curso do curso que solicitou a turma são contabilizados?**
+> 
+> O cálculo é feito desta maneira pois o docente não pode controlar quais alunos de outros cursos estão matriculados nas
+> suas turmas. Estes alunos matriculam-se à revelia do curso que solicitou a turma, e do departamento que disponibilizou
+> o(s) docente(s).
+> 
+> Por exemplo: uma disciplina de Cálculo A, solicitada pelo curso de Engenharia Química, pode ter alunos de Engenharia 
+> Civil, Ciência da Computação, Sistemas de Informação, etc. Seria injusto que estes alunos fossem contabilizados no
+> cálculo do ICDC, pois o docente, no momento que concordou em lecionar a turma para Engenharia Química, não 
+> necessariamente concordou em lecionar para alunos de outros cursos - que podem ter valores de CPC bem distintos do
+> curso que solicitou a turma.
+> 
+> A maneira como o docente prepara sua aula para um curso também pode não ser adequada para alunos de outros cursos.
+
 
 #### Relação de peso de alunos
 
@@ -107,7 +123,7 @@ A proporção de alunos $\alpha$, $\beta$ e $\gamma$ são simplesmente o somató
 mesmo do curso de solicitação da vaga na turma, **para aquela modalidade,** dividido pelo número de alunos, cujo curso 
 é o mesmo do curso de solicitação da vaga na turma, **para todas as modalidades:**
 
-#### Graduação 
+#### Graduação
 
 $$
 \alpha = \frac{\sum\_{t}^{T\_{\text{graduação}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}}
@@ -190,32 +206,32 @@ $$
 $$
 
 O docente João da Silva possui 47 alunos no total, mas apenas 35 são do curso que solicitou as turmas nas 
-quais eles estudaram. Portanto, $$\sum\_{t}^{T} N\^{(t)} = (20 + 15) = 35$.
+quais eles estudaram. Então $\sum\_{t}^{T} N\^{(t)} = (20 + 15) = 35$.
 
-Como o docente leciona apenas na graduação, seu $\alpha$ será $\alpha = \frac{35}{35} = 1$. Portanto, o ICDC do docente 
-João da Silva é
+Como o docente leciona apenas na graduação, seu $\alpha$ será $\alpha = \frac{35}{35} = 1$. 
+
+O ICDC do docente João da Silva é
 
 $$
 \begin{eqnarray}
 ICDC &= \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}} \\
 & \\
 ICDC &= (1 * 3.45) + (0 * 0) + (0 * 0) \\
+ICDC &= 3.45 \\
 \end{eqnarray}
 $$
 
-Que é simplesmente a $\text{Média}\_{\text{graduação}}$.
-
 ### Exemplo 2: dois professores em uma disciplina
 
-Algumas disciplinas são lecionadas por mais de um docente. Para estes casos, considera-se apenas o encargo didático do
-docente nas disciplinas.
+Algumas disciplinas são lecionadas por mais de um docente. Para estes casos, considera-se apenas o encargo didático 
+respectivo a cada docente, para cada disciplina.
 
 | Turma | Disciplina | Modalidade |                       Encargo didático | Curso de solicitação da turma |       Conceito de Curso (CC) |                                       Alunos |
 |:------|:-----------|:-----------|---------------------------------------:|:------------------------------|-----------------------------:|---------------------------------------------:|
 | 10    | Cálculo A  | Graduação  | 30h (João da Silva); 60h (Pedro Paulo) | Engenharia Química            |                        3.366 | 20 (Eng. Química); 7 (Ciência da Computação) |
 | 11    | Cálculo B  | Graduação  |                    90h (João da Silva) | Engenharia Civil              |                        3.570 |            15 (Eng. Civil); 5 (Eng. Química) |
 
-A nota média da graduação do docente João da Silva é
+A nota média da graduação do docente **João da Silva** é
 
 $$
 \begin{eqnarray}
@@ -229,7 +245,7 @@ $$
 \end{eqnarray}
 $$
 
-A nota média da graduação do Docente Pedro Paulo é
+A nota média da graduação do docente **Pedro Paulo** é
 
 $$
 \begin{eqnarray}
