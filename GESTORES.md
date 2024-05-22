@@ -4,18 +4,26 @@ Este documento detalha a lógica de cálculo do **Índice de Contribuição Doce
 
 ## Sumário 
 
-  * [Proposta](#proposta)
-  * [Cálculo](#cálculo)
-    * [Nota média por modalidade](#nota-média-por-modalidade)
-      * [Relação de peso de alunos](#relação-de-peso-de-alunos)
-        * [Equivalência de alunos de mestrado](#equivalência-de-alunos-de-mestrado)
-        * [Equivalência de alunos de doutorado](#equivalência-de-alunos-de-doutorado)
-    * [Proporção de alunos](#proporção-de-alunos)
-      * [Graduação](#graduação-)
-      * [Mestrado](#mestrado)
-      * [Doutorado](#doutorado)
-    * [Cálculo do ICDC](#cálculo-do-icdc)
-  * [Exemplos](#exemplos)
+* [Proposta](#proposta)
+* [Cálculo](#cálculo)
+  * [Nota média por modalidade](#nota-média-por-modalidade)
+    * [Relação de peso de alunos](#relação-de-peso-de-alunos)
+      * [Equivalência de alunos de mestrado](#equivalência-de-alunos-de-mestrado)
+      * [Equivalência de alunos de doutorado](#equivalência-de-alunos-de-doutorado)
+  * [Proporção de alunos](#proporção-de-alunos)
+    * [Graduação](#graduação-)
+    * [Mestrado](#mestrado)
+    * [Doutorado](#doutorado)
+  * [Cálculo do ICDC](#cálculo-do-icdc)
+* [Casos especiais](#casos-especiais)
+  * [Cursos ABI (Área Básica de Ingresso)](#cursos-abi-área-básica-de-ingresso)
+  * [Cursos técnicos, ensino médio, e educação básica](#cursos-técnicos-ensino-médio-e-educação-básica)
+  * [Período de tempo de cálculo](#período-de-tempo-de-cálculo)
+* [Exemplos](#exemplos)
+  * [Exemplo 1: um professor por disciplina](#exemplo-1-um-professor-por-disciplina)
+  * [Exemplo 2: dois professores em uma disciplina](#exemplo-2-dois-professores-em-uma-disciplina)
+  * [Exemplo 3: cursos de pós-graduação](#exemplo-3-cursos-de-pós-graduação)
+
 
 ## Proposta
 
@@ -123,11 +131,11 @@ Onde:
   graduação, mestrado e doutorado, cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor
   deu aula no ano do cálculo;
 * $\sum\_{t}^{T} N\^{(t)}$ são todos os alunos cujo curso é o mesmo curso de solicitação de vaga na turma, para os 
-  quais o professor deu aula no ano analisado.
+  quais o professor deu aula no ano do cálculo.
 
 ### Cálculo do ICDC
 
-O cálculo do ICDC é dado por
+O ICDC é dado por
 
 $$
 ICDC = \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}}
