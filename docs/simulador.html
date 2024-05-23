@@ -14,8 +14,6 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js">
     </script>
 
-    <!-- ícones: <a href="https://www.freepik.com/free-vector/education-school-isometric-3d-icons-science-university-college-graduation-vector-illustration_11060754.htm#fromView=search&page=1&position=45&uuid=6f7fbe06-2624-4430-a56d-d69225432bcf">Image by macrovector</a> on Freepik -->
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="static/images/favicon-32x32.png">
     <title>
@@ -57,7 +55,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a id="brand" class="navbar-brand titulo" href="#">
-                Simulador ICDC
+                ICDC
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -74,7 +72,7 @@
                         <a id="nav-link-nota-tecnica" class="nav-link texto" href="/nota-tecnica">Nota técnica</a>
                     </li>
                     <li class="nav-item">
-                        <a id="nav-link-simulador" class="nav-link texto" href="/simulador">Simulador</a>
+                        <a id="nav-link-simulador" class="nav-link texto" href="#">Simulador</a>
                     </li>
                 </ul>
             </div>
@@ -217,18 +215,26 @@
                         </td>
                     </tr>
                     </tbody>
-
-
                 </table>
-
-<!--                <div class="form-check">-->
-<!--                    <input class="form-check-input" type="checkbox" value="prof-joao" id="prof-joao">-->
-<!--                    <label class="form-check-label" for="prof-joao">Professor João</label>-->
-<!--                </div>-->
-<!--                <div class="form-check">-->
-<!--                    <input class="form-check-input" type="checkbox" value="prof-joao" id="prof-pablo">-->
-<!--                    <label class="form-check-label" for="prof-pablo">Professor Pablo</label>-->
-<!--                </div>-->
+            </div>
+        </div>
+        <div class="row board rounded p-4 mt-2 mb-2">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="title text-center">Cálculo</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- graduação -->
+                        <p class="lead">$$\text{Média}_{\text{graduação}} = \frac{\sum_{t}^{T \in \text{graduação}} (N^{(t)} * P_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{graduação}} (N^{(t)} * P_{\text{graduação}} * \text{encargo}^{(t)})} $$</p>
+                        <!-- mestrado -->
+                        <p class="lead">$$\text{Média}_{\text{mestrado}} = \frac{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} * P_{\text{mestrado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} * P_{\text{mestrado}} * \text{encargo}^{(t)})} $$</p>
+                        <!-- doutorado -->
+                        <p class="lead">$$\text{Média}_{\text{doutorado}} = \frac{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}} * \text{encargo}^{(t)})} $$</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -237,7 +243,21 @@
 </body>
 
 <!-- importa jquery -->
-<script type="application/javascript" src="static/js/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous">
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- configura interpretador mathjax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
 
 <script type="application/javascript">
     function getRow(id_element) {
@@ -375,6 +395,7 @@
             .done(function(data) {
                 // Insert the loaded content into the desired element
                 data = data.replaceAll('{{ row }}', next_row_number);
+                data = data.replaceAll('{{ col }}', 0);
                 data = data.replace('{{ class_number }}', next_row_number + 1);
 
                 let new_row = document.createElement('tr');
@@ -410,35 +431,10 @@
         }
     }
 
-    /**
-     * Função que deixa colorido o link da página ativa
-     */
-    function activateLink() {
-        let path = window.location.pathname;
-        let page = path.split("/").pop();
-        if (page.includes(".")) {
-            page = page.substring(0, page.indexOf('.'));
-        }
-        let element = null;
-        if (page.length === 0) {
-            element = document.getElementById('nav-link-index');
-        } else {
-            element = document.getElementById('nav-link-' + page);
-        }
-        if (element != null) {
-            element.classList.add('active');
-            element.style.color = 'var(--cor-principal)';
-            element.style.opacity = 0.9;
-        }
-    }
-
     addCallbacksToTableRow(0);
 
     document.getElementById('link-adicionar-linha-tabela').addEventListener('click', addTableLine);
     document.getElementById('link-remover-linha-tabela').addEventListener('click', removeTableLine);
-
-    // TODO chamar depois
-    // activateLink();  // chama a função
-
 </script>
+<script type="application/javascript" src="static/js/navbar.js"></script>
 </html>
