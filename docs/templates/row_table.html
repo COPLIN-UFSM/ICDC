@@ -1,0 +1,93 @@
+<tr id="tr-{{ row }}">
+    <td>{{ class_number }}</td>
+    <td>
+        <select class="form-select" aria-label="select-modalidade-{{ row }}" id="select-modalidade-{{ row }}">
+            <option value="graduacao">Graduação</option>
+            <option value="pos-graduacao">Pós-graduação</option>
+        </select>
+    </td>
+    <td id="td-docente-{{ row }}">
+        <div class="row mb-2" id="div-docente-{{ row }}-{{ col }}">
+            <div class="col-8">
+                <select class="form-select" aria-label="select-docente-{{ row }}-{{ col }}" id="select-docente-{{ row }}">
+                    <option value="joao" selected>João da Silva</option>
+                    <option value="pedro">Pedro Paulo</option>
+                    <option value="maria">Maria Abigail</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <input type="number" class="form-control" id="input-encargo-{{ row }}-{{ col }}" value="60">
+            </div>
+        </div>
+        <div class="row mb-2" id="div-links-adicionar-remover-docente-{{ row }}">
+            <div class="col-4">
+                <a id="link-adicionar-linha-docente-{{ row }}" href="">Adicionar</a>
+            </div>
+            <div class="col-4">
+                <a id="link-remover-linha-docente-{{ row }}" href="">Remover</a>
+            </div>
+            <div class="col-4">
+
+            </div>
+        </div>
+    </td>
+    <td>
+        <div class="row mb-2" id="div-cpc-continuo-{{ row }}">
+            <div class="col-6">
+                CPC contínuo
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" id="input-cpc-{{ row }}" value="3.366">
+            </div>
+        </div>
+        <div class="row" id="div-conceito-capes-{{ row }}">
+            <div class="col-6">
+                Conceito CAPES
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" id="input-capes-{{ row }}" value="5">
+            </div>
+        </div>
+    </td>
+    <td>
+        <div class="row mb-2">
+            <div class="col-4">
+                Curso de solicitação
+            </div>
+            <div class="col-8">
+                <div class="row mb-2" id="div-alunos-graduacao-{{ row }}">
+                    <div class="col-6">
+                        Graduação
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control" id="input-curso-solicitacao-graduacao-{{ row }}" value="20">
+                    </div>
+                </div>
+                <div class="row mb-2" id="div-alunos-mestrado-{{ row }}">
+                    <div class="col-6">
+                        Mestrado
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control" id="input-curso-solicitacao-mestrado-{{ row }}" value="7">
+                    </div>
+                </div>
+                <div class="row mb-2" id="div-alunos-doutorado-{{ row }}">
+                    <div class="col-6">
+                        Doutorado
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control" id="input-curso-solicitacao-doutorado-{{ row }}" value="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                Outros cursos
+            </div>
+            <div class="col-4">
+                <input type="number" class="form-control" id="input-curso-outros-{{ row }}" value="5">
+            </div>
+        </div>
+    </td>
+</tr>
