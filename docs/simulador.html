@@ -88,7 +88,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Turma</th>
-                        <th scope="col">Modalidade</th>
+                        <th scope="col">Nível</th>
                         <th scope="col">Encargo didático</th>
                         <th scope="col">Conceito de Curso (CC)</th>
                         <th scope="col">Alunos</th>
@@ -98,7 +98,7 @@
                     <tr id="tr-0">
                         <td>1</td>
                         <td>
-                            <select class="form-select" aria-label="select-modalidade-0" id="select-modalidade-0">
+                            <select class="form-select" aria-label="select-nivel-0" id="select-nivel-0">
                                 <option value="graduacao">Graduação</option>
                                 <option value="pos-graduacao">Pós-graduação</option>
                             </select>
@@ -106,7 +106,7 @@
                         <td id="td-docente-0">
                             <div class="row mb-2" id="div-docente-0-0">
                                 <div class="col-8">
-                                    <select class="form-select" aria-label="select-docente-0-0" id="select-docente-0">
+                                    <select class="form-select" aria-label="select-docente-0-0" id="select-docente-0-0">
                                         <option value="joao" selected>João da Silva</option>
                                         <option value="pedro">Pedro Paulo</option>
                                         <option value="maria">Maria Abigail</option>
@@ -219,20 +219,38 @@
             </div>
         </div>
         <div class="row board rounded p-4 mt-2 mb-2">
-            <div class="col">
+            <div class="col-2">
+                <select class="form-select" aria-label="select-docente-calculo" id="select-docente-calculo">
+                    <option value="joao" selected>João da Silva</option>
+                    <option value="pedro">Pedro Paulo</option>
+                    <option value="maria">Maria Abigail</option>
+                </select>
+            </div>
+            <div class="col-10">
                 <div class="row">
-                    <div class="col">
-                        <h2 class="title text-center">Cálculo</h2>
+                    <div class="col text-center">
+                        <h2 class="title">Cálculo</h2>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <!-- graduação -->
-                        <p class="lead">$$\text{Média}_{\text{graduação}} = \frac{\sum_{t}^{T \in \text{graduação}} (N^{(t)} * P_{\text{graduação}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{graduação}} (N^{(t)} * P_{\text{graduação}} * \text{encargo}^{(t)})} $$</p>
-                        <!-- mestrado -->
-                        <p class="lead">$$\text{Média}_{\text{mestrado}} = \frac{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} * P_{\text{mestrado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} * P_{\text{mestrado}} * \text{encargo}^{(t)})} $$</p>
-                        <!-- doutorado -->
-                        <p class="lead">$$\text{Média}_{\text{doutorado}} = \frac{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}} * \text{encargo}^{(t)})} $$</p>
+                        <div class="d-flex justify-content-center text-center">
+                            <div>
+                                <!-- graduação -->
+                                <p class="lead" id="media-graduacao-0">$$\text{Média}_{\text{graduação}} = \frac{\sum_{t}^{T \in \text{graduação}} (N^{(t)} * P_{\text{graduação}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{graduação}} (N^{(t)} * P_{\text{graduação}}^{(t)} * \text{encargo}^{(t)})} $$</p>
+                                <p class="lead" id="media-graduacao-1"></p>
+                                <p class="lead" id="media-graduacao-2"></p>
+                                <!-- mestrado -->
+                                <p class="lead" id="media-mestrado-0">$$\text{Média}_{\text{mestrado}} = \frac{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} * P_{\text{mestrado}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} * P_{\text{mestrado}}^{(t)} * \text{encargo}^{(t)})} $$</p>
+                                <p class="lead" id="media-mestrado-1"></p>
+                                <p class="lead" id="media-mestrado-2"></p>
+                                <!-- doutorado -->
+                                <p class="lead" id="media-doutorado-0">$$\text{Média}_{\text{doutorado}} = \frac{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)})} $$</p>
+                                <p class="lead" id="media-doutorado-1">
+                                <p class="lead" id="media-doutorado-2">
+                                <p class="lead" id="icdc">0</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -255,186 +273,156 @@
 <!-- configura interpretador mathjax -->
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      displayAlign: "left"
     });
 </script>
 
-<script type="application/javascript">
-    function getRow(id_element) {
-        /**
-         * Dado o nome de um elemento, retorna qual linha da tabela (começando em 0) este elemento pertence
-         */
-        let splitted = id_element.split('-');
-        let last_element = parseInt(splitted.slice(-1)[0]);
-        let before_last_element = parseInt(splitted.slice(-2)[0]);
-        if(isNaN(before_last_element)) {
-            return last_element;
-        }
-        return before_last_element;
-    }
-
-    function flipElements(row, modality_selected) {
-        let elements_graduation =  ['div-cpc-continuo-', 'div-alunos-graduacao-'];
-        let elements_postgraduation = ['div-conceito-capes-', 'div-alunos-mestrado-', 'div-alunos-doutorado-'];
-
-        let to_hide = null;
-        let to_show = null;
-
-        if(modality_selected === 'pos-graduacao') {
-            to_hide = elements_graduation;
-            to_show = elements_postgraduation;
-        } else {  // value_selected === 'pos-graduacao'
-            to_hide = elements_postgraduation;
-            to_show = elements_graduation;
-        }
-
-        for(let i = 0; i < to_hide.length; i++) {
-            document.getElementById(to_hide[i] + row).hidden = true;
-        }
-        for(let i = 0; i < to_show.length; i++) {
-            document.getElementById(to_show[i] + row).hidden = false;
-        }
-    }
-
-    function selectModality(event) {
-        /**
-         * Função que esconde ou mostra formulários, dependendo do que foi selecionado na coluna modalidade
-         */
-        let caller = event.target;  // pega o select que chamou o evento
-        let id_caller = caller.id;
-        let row_caller = getRow(id_caller);
-        let modality_selected = caller.value;
-
-        flipElements(row_caller, modality_selected);
-    }
-
-    function getNextTableRowNumber() {
-        let counter = 0;
-        let el = document.getElementById('tr-' + counter);
-        while(el !== null) {
-            counter += 1;
-            el = document.getElementById('tr-' + counter);
-        }
-        return counter;
-    }
-
-    function getNextProfessorRowNumber(row) {
-        let counter = 0;
-        let el = document.getElementById('div-docente-' + row + '-' + counter);
-        while(el !== null) {
-            counter += 1;
-            el = document.getElementById('div-docente-' + row + '-' + counter);
-        }
-        return counter;
-    }
-
-    function addProfessors(event) {
-        /**
-         * Adiciona uma nova sublinha de docente a uma linha da tabela
-         */
-        event.preventDefault();
-
-        let caller = event.target;  // pega o select que chamou o evento
-        let id_caller = caller.id;
-        let row = getRow(id_caller);
-        let col = getNextProfessorRowNumber(row);
-
-        $.get('templates/row_professors.html')
-            .done(function(data) {
-                // Insert the loaded content into the desired element
-                data = data.replaceAll('{{ row }}', row);
-                data = data.replaceAll('{{ col }}', col);
-
-                let new_row = document.createElement('div');
-                new_row.innerHTML = data.trim();
-                new_row = new_row.firstChild;
-
-                let row_professors = document.getElementById('td-docente-' + row);
-                let row_add_remove = document.getElementById('div-links-adicionar-remover-docente-' + row)
-                row_professors.removeChild(row_add_remove);
-                row_professors.appendChild(new_row);
-                row_professors.appendChild(row_add_remove);
-            })
-            .fail(function() {
-                console.error('Failed to load the HTML snippet');
-            });
-    }
-
-    function removeProfessors(event) {
-        event.preventDefault();
-
-        let caller = event.target;  // pega o select que chamou o evento
-        let id_caller = caller.id;
-        let row = getRow(id_caller);
-        let col = getNextProfessorRowNumber(row) - 1;
-
-        // impede remover a linha zero
-        if(col > 0) {
-            let to_remove = document.getElementById('div-docente-' + row + '-' + col);
-            to_remove.parentElement.removeChild(to_remove);
-        }
-    }
-
-    function addCallbacksToTableRow(row) {
-        document.getElementById('select-modalidade-' + row).addEventListener('change', selectModality);
-        flipElements(row, 'graduacao');
-
-        document.getElementById('link-adicionar-linha-docente-' + row).addEventListener('click', addProfessors);
-        document.getElementById('link-remover-linha-docente-' + row).addEventListener('click', removeProfessors);
-    }
-
-    function addTableLine(event) {
-        /**
-         * Adiciona uma nova linha à tabela
-         */
-        event.preventDefault();
-
-        let next_row_number = getNextTableRowNumber();
-
-        $.get('templates/row_table.html')
-            .done(function(data) {
-                // Insert the loaded content into the desired element
-                data = data.replaceAll('{{ row }}', next_row_number);
-                data = data.replaceAll('{{ col }}', 0);
-                data = data.replace('{{ class_number }}', next_row_number + 1);
-
-                let new_row = document.createElement('tr');
-                new_row.innerHTML = data.trim();
-                new_row.setAttribute('id', 'tr-' + next_row_number);
-
-                let last_row = document.getElementById('tr-last');
-                let parent = last_row.parentElement;
-                parent.removeChild(last_row);
-                parent.appendChild(new_row);
-                parent.appendChild(last_row);
-
-                addCallbacksToTableRow(next_row_number);
-            })
-            .fail(function() {
-                console.error('Failed to load the HTML snippet');
-            });
-    }
-
-    function removeTableLine(event) {
-        /**
-         * Remove a última linha da tabela
-         */
-        event.preventDefault();
-
-        let last_row_number = getNextTableRowNumber() - 1;
-
-        console.log('próxima linha é ' + last_row_number);
-
-        if(last_row_number > 0) {
-            let to_remove = document.getElementById('tr-' + last_row_number);
-            to_remove.parentElement.removeChild(to_remove);
-        }
-    }
-
-    addCallbacksToTableRow(0);
-
-    document.getElementById('link-adicionar-linha-tabela').addEventListener('click', addTableLine);
-    document.getElementById('link-remover-linha-tabela').addEventListener('click', removeTableLine);
-</script>
+<script type="application/javascript" src="static/js/table_simulator.js"></script>
 <script type="application/javascript" src="static/js/navbar.js"></script>
+
+<script type="application/javascript">
+
+    function getElementValue(name) {
+        return document.getElementById(name).value;
+    }
+
+    function relacaoPesoAluno(modalidade, conceito) {
+        if(modalidade === 'graduacao') {
+            return 1;
+        }
+        if(modalidade === 'mestrado') {
+            if(parseInt(conceito) === 3) return 1;
+            if(parseInt(conceito) === 4) return 2;
+            if(parseInt(conceito) === 5) return 3;
+            if(parseInt(conceito) === 6) return 3;
+            if(parseInt(conceito) === 7) return 3;
+        }
+        if(modalidade === 'doutorado') {
+            if(parseInt(conceito) === 3) return 1;
+            if(parseInt(conceito) === 4) return 2;
+            if(parseInt(conceito) === 5) return 3;
+            if(parseInt(conceito) === 6) return 4;
+            if(parseInt(conceito) === 7) return 5;
+        }
+        return null;
+    }
+
+    function coletaDados() {
+        /**
+         * Coleta todos os dados inseridos na tabela
+         */
+        let data = {};
+        let n_rows = getNextTableRowNumber();
+        for(let row = 0; row < n_rows; row++) {
+            let n_professors = getNextProfessorRowNumber(row);
+
+            data[row] = {};
+            data[row]['modalidade'] = getElementValue('select-modalidade-' + row);
+            if(data[row]['modalidade'] === 'graduacao') {
+                data[row]['cc'] = parseFloat(getElementValue('input-cpc-' + row));
+                data[row]['alunos'] = {};
+                data[row]['alunos']['graduacao'] = parseInt(getElementValue('input-curso-solicitacao-graduacao-' + row));
+            } else {
+                data[row]['cc'] = parseFloat(getElementValue('input-capes-' + row));
+
+                data[row]['alunos'] = {};
+                data[row]['alunos']['mestrado'] = parseInt(getElementValue('input-curso-solicitacao-mestrado-' + row));
+                data[row]['alunos']['doutorado'] = parseInt(getElementValue('input-curso-solicitacao-doutorado-' + row));
+            }
+
+            data[row]['professores'] = {};
+            for(let col = 0; col < n_professors; col++) {
+                data[row]['professores'][col] = {};
+                data[row]['professores'][col]['nome'] = getElementValue('select-docente-' + row + '-' + col);
+                data[row]['professores'][col]['encargo'] = parseFloat(getElementValue('input-encargo-' + row + '-' + col));
+            }
+        }
+        return data;
+    }
+
+    function correctName(modalidade) {
+        if(modalidade === 'graduacao') {
+            return 'graduação';
+        }
+        return modalidade;
+    }
+
+    function calculaNotaMediaDocente(docente, data) {
+        let turmas_docente = {};
+
+        let latex_num_str = [];
+        let latex_den_str = [];
+
+        for (const [row, row_dict] of Object.entries(data)) {
+            if(row_dict['nivel'] === nivel) {
+                for(const [col, col_dict] of Object.entries(row_dict['professores'])) {
+                    if(col_dict['nome'] === docente) {
+                        turmas_docente[row] = {};
+                        turmas_docente[row]['cc'] = row_dict['cc'];
+                        turmas_docente[row]['alunos'] = row_dict['alunos'][modalidade];
+                        turmas_docente[row]['peso_aluno'] = relacaoPesoAluno(modalidade, turmas_docente[row]['cc']);
+                        turmas_docente[row]['encargo'] = col_dict['encargo'];
+
+                        latex_num_str.push(
+                            '(' + turmas_docente[row]['alunos'] + ' * ' + turmas_docente[row]['peso_aluno'] + ' * ' +
+                            turmas_docente[row]['encargo'] + ' * ' + turmas_docente[row]['cc'] + ')'
+                        );
+                        latex_den_str.push(
+                            '(' + turmas_docente[row]['alunos'] + ' * ' + turmas_docente[row]['peso_aluno'] + ' * ' +
+                            turmas_docente[row]['encargo'] + ')'
+                        )
+                    }
+                }
+            }
+        }
+
+        let cname = correctName(modalidade);
+
+        // o docente não deu nenhuma aula!
+        if(Object.keys(turmas_docente).length === 0) {
+            document.getElementById('media-' + modalidade + '-1').innerText = '';
+            document.getElementById('media-' + modalidade + '-2').innerText = '$$\\text{Média}_{\\text{' + cname + '}} = 0$$';
+        } else {
+             document.getElementById('media-' + modalidade + '-1').innerText = '$$' +
+                '\\text{Média}_{\\text{' + cname + '}} = ' + '\\frac{' + latex_num_str.join('+') + '}{' + latex_den_str.join('+') +
+                '}$$';
+
+            let numerador = 0;
+            let denominador = 0;
+            for (const [turma, turma_dict] of Object.entries(turmas_docente)) {
+                let den = turma_dict['alunos'] * turma_dict['peso_aluno'] * turma_dict['encargo'];
+                denominador += den;
+                numerador += den * turma_dict['cc'];
+            }
+            let val = numerador/denominador;
+
+            document.getElementById('media-' + modalidade + '-2').innerText = '$$\\text{Média}_{\\text{' + cname + '}} = ' + val + '$$';
+        }
+
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+
+    function atualizaCalculos(event) {
+        event.preventDefault();
+
+        let caller = event.target;
+        let docente = caller.value;
+
+        console.log(docente);
+
+        let dados = coletaDados();
+        calculaNotaMediaDocente(docente, dados);
+    }
+
+    let select_docente_calculo = document.getElementById('select-docente-calculo');
+
+    select_docente_calculo.addEventListener('change', atualizaCalculos);
+    const event = new Event('change');
+    select_docente_calculo.dispatchEvent(event);
+
+
+
+</script>
+
 </html>
