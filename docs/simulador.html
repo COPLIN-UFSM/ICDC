@@ -248,7 +248,6 @@
                                 <p class="lead" id="media-doutorado-0">$$\text{Média}_{\text{doutorado}} = \frac{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)})} $$</p>
                                 <p class="lead" id="media-doutorado-1">
                                 <p class="lead" id="media-doutorado-2">
-                                <p class="lead" id="icdc">0</p>
                             </div>
                         </div>
                     </div>
@@ -266,7 +265,7 @@
         crossorigin="anonymous">
 </script>
 
-<script type="text/javascript" async
+<script type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
@@ -278,151 +277,27 @@
     });
 </script>
 
-<script type="application/javascript" src="static/js/table_simulator.js"></script>
 <script type="application/javascript" src="static/js/navbar.js"></script>
+<script type="application/javascript" src="static/js/table.js"></script>
+<script type="application/javascript" src="static/js/math.js"></script>
 
 <script type="application/javascript">
-
-    function getElementValue(name) {
-        return document.getElementById(name).value;
-    }
-
-    function relacaoPesoAluno(modalidade, conceito) {
-        if(modalidade === 'graduacao') {
-            return 1;
-        }
-        if(modalidade === 'mestrado') {
-            if(parseInt(conceito) === 3) return 1;
-            if(parseInt(conceito) === 4) return 2;
-            if(parseInt(conceito) === 5) return 3;
-            if(parseInt(conceito) === 6) return 3;
-            if(parseInt(conceito) === 7) return 3;
-        }
-        if(modalidade === 'doutorado') {
-            if(parseInt(conceito) === 3) return 1;
-            if(parseInt(conceito) === 4) return 2;
-            if(parseInt(conceito) === 5) return 3;
-            if(parseInt(conceito) === 6) return 4;
-            if(parseInt(conceito) === 7) return 5;
-        }
-        return null;
-    }
-
-    function coletaDados() {
-        /**
-         * Coleta todos os dados inseridos na tabela
-         */
-        let data = {};
-        let n_rows = getNextTableRowNumber();
-        for(let row = 0; row < n_rows; row++) {
-            let n_professors = getNextProfessorRowNumber(row);
-
-            data[row] = {};
-            data[row]['modalidade'] = getElementValue('select-modalidade-' + row);
-            if(data[row]['modalidade'] === 'graduacao') {
-                data[row]['cc'] = parseFloat(getElementValue('input-cpc-' + row));
-                data[row]['alunos'] = {};
-                data[row]['alunos']['graduacao'] = parseInt(getElementValue('input-curso-solicitacao-graduacao-' + row));
-            } else {
-                data[row]['cc'] = parseFloat(getElementValue('input-capes-' + row));
-
-                data[row]['alunos'] = {};
-                data[row]['alunos']['mestrado'] = parseInt(getElementValue('input-curso-solicitacao-mestrado-' + row));
-                data[row]['alunos']['doutorado'] = parseInt(getElementValue('input-curso-solicitacao-doutorado-' + row));
-            }
-
-            data[row]['professores'] = {};
-            for(let col = 0; col < n_professors; col++) {
-                data[row]['professores'][col] = {};
-                data[row]['professores'][col]['nome'] = getElementValue('select-docente-' + row + '-' + col);
-                data[row]['professores'][col]['encargo'] = parseFloat(getElementValue('input-encargo-' + row + '-' + col));
-            }
-        }
-        return data;
-    }
-
-    function correctName(modalidade) {
-        if(modalidade === 'graduacao') {
-            return 'graduação';
-        }
-        return modalidade;
-    }
-
-    function calculaNotaMediaDocente(docente, data) {
-        let turmas_docente = {};
-
-        let latex_num_str = [];
-        let latex_den_str = [];
-
-        for (const [row, row_dict] of Object.entries(data)) {
-            if(row_dict['nivel'] === nivel) {
-                for(const [col, col_dict] of Object.entries(row_dict['professores'])) {
-                    if(col_dict['nome'] === docente) {
-                        turmas_docente[row] = {};
-                        turmas_docente[row]['cc'] = row_dict['cc'];
-                        turmas_docente[row]['alunos'] = row_dict['alunos'][modalidade];
-                        turmas_docente[row]['peso_aluno'] = relacaoPesoAluno(modalidade, turmas_docente[row]['cc']);
-                        turmas_docente[row]['encargo'] = col_dict['encargo'];
-
-                        latex_num_str.push(
-                            '(' + turmas_docente[row]['alunos'] + ' * ' + turmas_docente[row]['peso_aluno'] + ' * ' +
-                            turmas_docente[row]['encargo'] + ' * ' + turmas_docente[row]['cc'] + ')'
-                        );
-                        latex_den_str.push(
-                            '(' + turmas_docente[row]['alunos'] + ' * ' + turmas_docente[row]['peso_aluno'] + ' * ' +
-                            turmas_docente[row]['encargo'] + ')'
-                        )
-                    }
-                }
-            }
-        }
-
-        let cname = correctName(modalidade);
-
-        // o docente não deu nenhuma aula!
-        if(Object.keys(turmas_docente).length === 0) {
-            document.getElementById('media-' + modalidade + '-1').innerText = '';
-            document.getElementById('media-' + modalidade + '-2').innerText = '$$\\text{Média}_{\\text{' + cname + '}} = 0$$';
-        } else {
-             document.getElementById('media-' + modalidade + '-1').innerText = '$$' +
-                '\\text{Média}_{\\text{' + cname + '}} = ' + '\\frac{' + latex_num_str.join('+') + '}{' + latex_den_str.join('+') +
-                '}$$';
-
-            let numerador = 0;
-            let denominador = 0;
-            for (const [turma, turma_dict] of Object.entries(turmas_docente)) {
-                let den = turma_dict['alunos'] * turma_dict['peso_aluno'] * turma_dict['encargo'];
-                denominador += den;
-                numerador += den * turma_dict['cc'];
-            }
-            let val = numerador/denominador;
-
-            document.getElementById('media-' + modalidade + '-2').innerText = '$$\\text{Média}_{\\text{' + cname + '}} = ' + val + '$$';
-        }
-
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-    }
-
     function atualizaCalculos(event) {
         event.preventDefault();
 
         let caller = event.target;
         let docente = caller.value;
 
-        console.log(docente);
-
-        let dados = coletaDados();
-        calculaNotaMediaDocente(docente, dados);
+        let dados_turmas = coletaDadosTurmas();
+        let dados_docentes = organizaDados(dados_turmas);
+        mostraFormulas(docente, dados_docentes);
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
 
     let select_docente_calculo = document.getElementById('select-docente-calculo');
-
     select_docente_calculo.addEventListener('change', atualizaCalculos);
     const event = new Event('change');
     select_docente_calculo.dispatchEvent(event);
-
-
-
 </script>
 
 </html>

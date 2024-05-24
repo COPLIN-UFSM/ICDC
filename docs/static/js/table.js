@@ -34,7 +34,7 @@ function flipElements(row, modality_selected) {
     }
 }
 
-function selectModality(event) {
+function selectLevel(event) {
     /**
      * Função que esconde ou mostra formulários, dependendo do que foi selecionado na coluna modalidade
      */
@@ -114,7 +114,7 @@ function removeProfessors(event) {
 }
 
 function addCallbacksToTableRow(row) {
-    document.getElementById('select-modalidade-' + row).addEventListener('change', selectModality);
+    document.getElementById('select-nivel-' + row).addEventListener('change', selectLevel);
     flipElements(row, 'graduacao');
 
     document.getElementById('link-adicionar-linha-docente-' + row).addEventListener('click', addProfessors);
