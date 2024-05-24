@@ -116,6 +116,11 @@ function organizaDados(data) {
 function mostraFormulas(docente, dados_docentes) {
     let modalidades = ['graduacao', 'mestrado', 'doutorado'];
 
+    let n_alunos = 0;
+    let proporcoes = {'graduacao': 0, 'mestrado': 0, 'doutorado': 0};
+    let notas_medias = {'graduacao': 0, 'mestrado': 0, 'doutorado': 0};
+    let alunos_modalidades = {'graduacao': 0, 'mestrado': 0, 'doutorado': 0};
+
     // o docente não deu nenhuma aula
     if(!dados_docentes[docente]) {
         for(let i = 0; i < modalidades.length; i++) {
@@ -123,7 +128,7 @@ function mostraFormulas(docente, dados_docentes) {
             let cname = correctName(modalidade);
 
             document.getElementById('media-' + modalidade + '-1').innerText = '';
-            document.getElementById('media-' + modalidade + '-2').innerText = '$$\\text{Média}_{\\text{' + cname + '}} = 0$$';
+            document.getElementById('media-' + modalidade + '-2').innerText = '$$ = 0$$';
         }
     } else {
         for(let i = 0; i < modalidades.length; i++) {
@@ -147,22 +152,47 @@ function mostraFormulas(docente, dados_docentes) {
                     denominador += den;
                     numerador += den * turma['cc'];
 
+                    alunos_modalidades[modalidade] += turma['alunos'];
+                    n_alunos += turma['alunos'];
+
                     latex_num_str.push('(' + turma['alunos'] + ' * ' + turma['peso_aluno'] + ' * ' + turma['encargo'] + ' * ' + turma['cc'] + ')')
                     latex_den_str.push('(' + turma['alunos'] + ' * ' + turma['peso_aluno'] + ' * ' + turma['encargo'] + ')')
                 }
             }
-            val = Math.round((numerador / denominador) * 1000) / 1000;
-
+            if(denominador > 0) {
+                val = Math.round((numerador / denominador) * 1000) / 1000;
+                notas_medias[modalidade] = val;
+            }
             // o docente não deu nenhuma aula nessa modalidade
             if (count_turmas === 0) {
                 document.getElementById('media-' + modalidade + '-1').innerText = '';
-                document.getElementById('media-' + modalidade + '-2').innerText = '$$\\text{Média}_{\\text{' + cname + '}} = 0$$';
+                document.getElementById('media-' + modalidade + '-2').innerText = '$$ = 0$$';
+
             } else {  // o docente deu uma aula nessa modalidade
                 document.getElementById('media-' + modalidade + '-1').innerText = '$$' +
-                    '\\text{Média}_{\\text{' + cname + '}} = ' + '\\frac{' + latex_num_str.join('+') + '}{' + latex_den_str.join('+') +
+                    ' = ' + '\\frac{' + latex_num_str.join('+') + '}{' + latex_den_str.join('+') +
                     '}$$';
-                document.getElementById('media-' + modalidade + '-2').innerText = '$$\\text{Média}_{\\text{' + cname + '}} = ' + val + '$$';
+                document.getElementById('media-' + modalidade + '-2').innerText = '$$ = ' + val + '$$';
             }
         }
     }
+    for(let i = 0; i < modalidades.length; i++) {
+        let modalidade = modalidades[i];
+        proporcoes[modalidade] = Math.round((parseFloat(alunos_modalidades[modalidade]) / parseFloat(n_alunos)) * 100) / 100;
+
+        document.getElementById('proporcao-' + modalidade + '-1').innerText = '$$ = \\frac{' + alunos_modalidades[modalidade] +'}{' + n_alunos + '}$$';
+        document.getElementById('proporcao-' + modalidade + '-2').innerText = '$$ = ' + proporcoes[modalidade] + '$$';
+    }
+
+    document.getElementById('icdc-1').innerText = '$$ = (' +
+        proporcoes['graduacao'] + ' * ' + notas_medias['graduacao'] + ') + (' +
+        proporcoes['mestrado'] + ' * ' + notas_medias['mestrado'] + ') + (' +
+        proporcoes['doutorado'] + ' * ' + notas_medias['doutorado'] +
+        ')$$';
+
+    document.getElementById('icdc-2').innerText = '$$ =' + (
+        (proporcoes['graduacao'] * notas_medias['graduacao']) +
+        (proporcoes['mestrado'] * notas_medias['mestrado']) +
+        (proporcoes['doutorado'] * notas_medias['doutorado'])
+        ) + '$$';
 }

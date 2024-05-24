@@ -169,7 +169,8 @@
                                             Graduação
                                         </div>
                                         <div class="col-6">
-                                            <input type="number" class="form-control" id="input-curso-solicitacao-graduacao-0" value="20">
+                                            <input type="number" class="form-control"
+                                                   id="input-curso-solicitacao-graduacao-0" value="20">
                                         </div>
                                     </div>
                                     <div class="row mb-2" id="div-alunos-mestrado-0">
@@ -177,7 +178,8 @@
                                             Mestrado
                                         </div>
                                         <div class="col-6">
-                                            <input type="number" class="form-control" id="input-curso-solicitacao-mestrado-0" value="7">
+                                            <input type="number" class="form-control"
+                                                   id="input-curso-solicitacao-mestrado-0" value="7">
                                         </div>
                                     </div>
                                     <div class="row mb-2" id="div-alunos-doutorado-0">
@@ -185,7 +187,8 @@
                                             Doutorado
                                         </div>
                                         <div class="col-6">
-                                            <input type="number" class="form-control" id="input-curso-solicitacao-doutorado-0" value="3">
+                                            <input type="number" class="form-control"
+                                                   id="input-curso-solicitacao-doutorado-0" value="3">
                                         </div>
                                     </div>
                                 </div>
@@ -219,36 +222,77 @@
             </div>
         </div>
         <div class="row board rounded p-4 mt-2 mb-2">
-            <div class="col-2">
+            <div class="col-12">
                 <select class="form-select" aria-label="select-docente-calculo" id="select-docente-calculo">
                     <option value="joao" selected>João da Silva</option>
                     <option value="pedro">Pedro Paulo</option>
                     <option value="maria">Maria Abigail</option>
                 </select>
             </div>
-            <div class="col-10">
+        </div>
+        <div class="row board rounded p-2 mt-2 mb-2">
+            <div class="col-12">
                 <div class="row">
                     <div class="col text-center">
                         <h2 class="title">Cálculo</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <div class="d-flex justify-content-center text-center">
-                            <div>
-                                <!-- graduação -->
-                                <p class="lead" id="media-graduacao-0">$$\text{Média}_{\text{graduação}} = \frac{\sum_{t}^{T \in \text{graduação}} (N^{(t)} * P_{\text{graduação}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{graduação}} (N^{(t)} * P_{\text{graduação}}^{(t)} * \text{encargo}^{(t)})} $$</p>
-                                <p class="lead" id="media-graduacao-1"></p>
-                                <p class="lead" id="media-graduacao-2"></p>
-                                <!-- mestrado -->
-                                <p class="lead" id="media-mestrado-0">$$\text{Média}_{\text{mestrado}} = \frac{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} * P_{\text{mestrado}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} * P_{\text{mestrado}}^{(t)} * \text{encargo}^{(t)})} $$</p>
-                                <p class="lead" id="media-mestrado-1"></p>
-                                <p class="lead" id="media-mestrado-2"></p>
-                                <!-- doutorado -->
-                                <p class="lead" id="media-doutorado-0">$$\text{Média}_{\text{doutorado}} = \frac{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} * P_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)})} $$</p>
-                                <p class="lead" id="media-doutorado-1">
-                                <p class="lead" id="media-doutorado-2">
-                            </div>
+                    <div class="col-12 board rounded p-2 me-2 mb-2">
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <p id="media-graduacao-0">$$\text{Média}_{\text{graduação}} = \frac{\sum_{t}^{T
+                                \in
+                                \text{graduação}} (N^{(t)} * P_{\text{graduação}}^{(t)} *
+                                \text{encargo}^{(t)} *
+                                \text{CC}^{(t)})}{\sum_{t}^{T \in \text{graduação}} (N^{(t)} *
+                                P_{\text{graduação}}^{(t)} * \text{encargo}^{(t)})} $$</p>
+
+                            <p id="media-graduacao-1"></p>
+                            <p id="media-graduacao-2"></p>
+                        </div>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <p id="media-mestrado-0">$$\text{Média}_{\text{mestrado}} = \frac{\sum_{t}^{T \in
+                                \text{mestrado}} (N^{(t)} * P_{\text{mestrado}}^{(t)} * \text{encargo}^{(t)} *
+                                \text{CC}^{(t)})}{\sum_{t}^{T \in \text{mestrado}} (N^{(t)} *
+                                P_{\text{mestrado}}^{(t)} * \text{encargo}^{(t)})} $$</p>
+                            <p id="media-mestrado-1"></p>
+                            <p id="media-mestrado-2"></p>
+                        </div>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <p id="media-doutorado-0">$$\text{Média}_{\text{doutorado}} = \frac{\sum_{t}^{T \in
+                                \text{doutorado}} (N^{(t)} * P_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)} *
+                                \text{CC}^{(t)})}{\sum_{t}^{T \in \text{doutorado}} (N^{(t)} *
+                                P_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)})} $$</p>
+                            <p id="media-doutorado-1">
+                            <p id="media-doutorado-2">
+                        </div>
+                    </div>
+                    <div class="col-12 board rounded p-2 me-2 mt-2">
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <p id="proporcao-graduacao-0">$$\alpha = \frac{\sum_{t}^{T_{\text{graduação}}}
+                                N^{(t)}}{\sum_{t}^{T} N^{(t)}} $$</p>
+                            <p id="proporcao-graduacao-1"></p>
+                            <p id="proporcao-graduacao-2"></p>
+                        </div>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <p id="proporcao-mestrado-0">$$\beta = \frac{\sum_{t}^{T_{\text{mestrado}}}
+                                N^{(t)}}{\sum_{t}^{T} N^{(t)}}$$</p>
+                            <p id="proporcao-mestrado-1"></p>
+                            <p id="proporcao-mestrado-2"></p>
+                        </div>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <p id="proporcao-doutorado-0">$$\gamma = \frac{\sum_{t}^{T_{\text{doutorado}}}
+                                N^{(t)}}{\sum_{t}^{T} N^{(t)}}$$</p>
+                            <p id="proporcao-doutorado-1"></p>
+                            <p id="proporcao-doutorado-2"></p>
+                        </div>
+                    </div>
+                    <div class="col-12 board rounded p-2 me-2 mt-2">
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <p id="icdc-0">$$ICDC = \alpha * \text{Média}_{\text{graduação}} + \beta *
+                                \text{Média}_{\text{mestrado}} + \gamma * \text{Média}_{\text{doutorado}}$$</p>
+                            <p id="icdc-1"></p>
+                            <p id="icdc-2"></p>
                         </div>
                     </div>
                 </div>
@@ -266,7 +310,7 @@
 </script>
 
 <script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 <!-- configura interpretador mathjax -->
