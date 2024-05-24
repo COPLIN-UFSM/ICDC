@@ -178,7 +178,10 @@ function mostraFormulas(docente, dados_docentes) {
     }
     for(let i = 0; i < modalidades.length; i++) {
         let modalidade = modalidades[i];
-        proporcoes[modalidade] = Math.round((parseFloat(alunos_modalidades[modalidade]) / parseFloat(n_alunos)) * 100) / 100;
+
+        if(n_alunos > 0) {
+            proporcoes[modalidade] = Math.round((parseFloat(alunos_modalidades[modalidade]) / parseFloat(n_alunos)) * 100) / 100;
+        }
 
         document.getElementById('proporcao-' + modalidade + '-1').innerText = '$$ = \\frac{' + alunos_modalidades[modalidade] +'}{' + n_alunos + '}$$';
         document.getElementById('proporcao-' + modalidade + '-2').innerText = '$$ = ' + proporcoes[modalidade] + '$$';
@@ -190,9 +193,12 @@ function mostraFormulas(docente, dados_docentes) {
         proporcoes['doutorado'] + ' * ' + notas_medias['doutorado'] +
         ')$$';
 
-    document.getElementById('icdc-2').innerText = '$$ =' + (
+    let icdc = + (
         (proporcoes['graduacao'] * notas_medias['graduacao']) +
         (proporcoes['mestrado'] * notas_medias['mestrado']) +
         (proporcoes['doutorado'] * notas_medias['doutorado'])
-        ) + '$$';
+    );
+    icdc = Math.round(icdc * 1000) / 1000;
+
+    document.getElementById('icdc-2').innerText = '$$ =' + icdc + '$$';
 }

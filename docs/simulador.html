@@ -66,10 +66,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a id="nav-link-index" class="nav-link texto" href="/index">Página inicial</a>
+                        <a id="nav-link-index" class="nav-link texto" href="/ICDC/index">Página inicial</a>
                     </li>
                     <li class="nav-item">
-                        <a id="nav-link-nota-tecnica" class="nav-link texto" href="/nota-tecnica">Nota técnica</a>
+                        <a id="nav-link-nota-tecnica" class="nav-link texto" href="/ICDC/nota-tecnica">Nota técnica</a>
                     </li>
                     <li class="nav-item">
                         <a id="nav-link-simulador" class="nav-link texto" href="#">Simulador</a>
@@ -84,6 +84,9 @@
     <div class="container">
         <div class="row">
             <div class="col board rounded p-4 mt-2 mb-2">
+                <div class="text-center">
+                    <h2 class="title">Turmas</h2>
+                </div>
                 <table class="table">
                     <thead>
                     <tr>
@@ -94,7 +97,7 @@
                         <th scope="col">Alunos</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="table-body">
                     <tr id="tr-0">
                         <td>1</td>
                         <td>
@@ -203,38 +206,43 @@
                             </div>
                         </td>
                     </tr>
-                    <tr id="tr-last">
-                        <td colspan="5">
-                            <div class="d-flex justify-content-center">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a id="link-adicionar-linha-tabela" href="">Adicionar</a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a id="link-remover-linha-tabela" href="">Remover</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="row board rounded p-4 mt-2 mb-2">
-            <div class="col-12">
-                <select class="form-select" aria-label="select-docente-calculo" id="select-docente-calculo">
-                    <option value="joao" selected>João da Silva</option>
-                    <option value="pedro">Pedro Paulo</option>
-                    <option value="maria">Maria Abigail</option>
-                </select>
+                <div class="d-flex justify-content-center">
+                    <div class="row">
+                        <div class="col-6">
+                            <a id="link-adicionar-linha-tabela" href="">Adicionar</a>
+                        </div>
+                        <div class="col-6">
+                            <a id="link-remover-linha-tabela" href="">Remover</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row board rounded p-2 mt-2 mb-2">
             <div class="col-12">
                 <div class="row">
                     <div class="col text-center">
-                        <h2 class="title">Cálculo</h2>
+                        <div class="row d-flex justify-content-center align-items-center p-2 mt-2 mb-2">
+                            <div class="col-6">
+                                <div class="text-end">
+                                    <h2 class="title">Índice de</h2>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="d-flex justify-content-start">
+                                    <select class="form-select form-select-lg" aria-label="select-docente-calculo" id="select-docente-calculo">
+                                    <option value="joao" selected>João da Silva</option>
+                                    <option value="pedro">Pedro Paulo</option>
+                                    <option value="maria">Maria Abigail</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row">
@@ -326,11 +334,92 @@
 <script type="application/javascript" src="static/js/math.js"></script>
 
 <script type="application/javascript">
+    function addCallbacksToTableRow(row) {
+        /**
+         * adiciona callbacks aos elementos de uma linha da tabela
+         */
+        document.getElementById('select-nivel-' + row).addEventListener('change', selectLevel);
+        document.getElementById('select-nivel-' + row).addEventListener('change', atualizaCalculos);
+        flipElements(row, 'graduacao');
+
+        document.getElementById('link-adicionar-linha-docente-' + row).addEventListener('click', addProfessors);
+        document.getElementById('link-remover-linha-docente-' + row).addEventListener('click', removeProfessors);
+
+        document.getElementById('link-adicionar-linha-docente-' + row).addEventListener('click', atualizaCalculos);
+        document.getElementById('link-remover-linha-docente-' + row).addEventListener('click', atualizaCalculos);
+
+        // sublinhas dos docentes e encargos
+        let n_cols = getNextProfessorRowNumber(row);
+        for(let col = 0; col < n_cols; col++) {
+            document.getElementById('select-docente-' + row + '-' + col).addEventListener('change', atualizaCalculos);
+            document.getElementById('input-encargo-' + row + '-' + col).addEventListener('input', atualizaCalculos);
+        }
+
+        // cpc contínuo e conceito capes
+        document.getElementById('input-cpc-' + row).addEventListener('input', atualizaCalculos);
+        document.getElementById('input-capes-' + row).addEventListener('input', atualizaCalculos);
+
+        // alunos de graduação, mestrado e doutorado
+        document.getElementById('input-curso-solicitacao-graduacao-' + row).addEventListener('input', atualizaCalculos);
+        document.getElementById('input-curso-solicitacao-mestrado-' + row).addEventListener('input', atualizaCalculos);
+        document.getElementById('input-curso-solicitacao-doutorado-' + row).addEventListener('input', atualizaCalculos);
+    }
+
+    function addTableLine(event) {
+        /**
+         * Adiciona uma nova linha à tabela
+         */
+        event.preventDefault();
+
+        let next_row_number = getNextTableRowNumber();
+
+        $.get('templates/row_table.html')
+            .done(function (data) {
+                // Insert the loaded content into the desired element
+                data = data.replaceAll('{{ row }}', next_row_number);
+                data = data.replaceAll('{{ col }}', 0);
+                data = data.replace('{{ class_number }}', next_row_number + 1);
+
+                let new_row = document.createElement('tr');
+                new_row.innerHTML = data.trim();
+                new_row.setAttribute('id', 'tr-' + next_row_number);
+
+                // let last_row = document.getElementById('tr-last');
+                let parent = document.getElementById('table-body');
+                // parent.removeChild(last_row);
+                parent.appendChild(new_row);
+                // parent.appendChild(last_row);
+
+                addCallbacksToTableRow(next_row_number);
+                // refaz os cálculos
+                atualizaCalculos(event);
+            })
+            .fail(function () {
+                console.error('Failed to load the HTML snippet');
+            });
+    }
+
+    function removeTableLine(event) {
+        /**
+         * Remove a última linha da tabela
+         */
+        event.preventDefault();
+
+        let last_row_number = getNextTableRowNumber() - 1;
+
+        if (last_row_number > 0) {
+            let to_remove = document.getElementById('tr-' + last_row_number);
+            to_remove.parentElement.removeChild(to_remove);
+
+            // refaz os cálculos
+            atualizaCalculos(event);
+        }
+    }
+
     function atualizaCalculos(event) {
         event.preventDefault();
 
-        let caller = event.target;
-        let docente = caller.value;
+        let docente = document.getElementById('select-docente-calculo').value;
 
         let dados_turmas = coletaDadosTurmas();
         let dados_docentes = organizaDados(dados_turmas);
@@ -338,10 +427,17 @@
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
 
-    let select_docente_calculo = document.getElementById('select-docente-calculo');
-    select_docente_calculo.addEventListener('change', atualizaCalculos);
+    // adiciona callbacks à linha zero, que sempre existe
+    addCallbacksToTableRow(0);
+
+    // adiciona callbacks aos botões de adicionar e remover linhas, que sempre existem
+    document.getElementById('link-adicionar-linha-tabela').addEventListener('click', addTableLine);
+    document.getElementById('link-remover-linha-tabela').addEventListener('click', removeTableLine);
+
+    let select_docente = document.getElementById('select-docente-calculo');
+    select_docente.addEventListener('change', atualizaCalculos);
     const event = new Event('change');
-    select_docente_calculo.dispatchEvent(event);
+    select_docente.dispatchEvent(event);
 </script>
 
 </html>
