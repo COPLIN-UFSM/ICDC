@@ -191,7 +191,7 @@ $$
 ### Cursos ABI (Área Básica de Ingresso)
 
 Para cursos ABI (Área Básica de Ingresso), em que o aluno ingressa em um curso básico e depois faz a opção por um curso
-específico (por exemplo, Ciência Biológicas), o núcleo comum não possui um CPC Contínuo pois nenhum aluno se forma neste
+específico (por exemplo, Ciências Biológicas), o núcleo comum não possui um CPC Contínuo pois nenhum aluno se forma neste
 curso. Portanto, para calcular o CPC Contínuo do núcleo comum, tira-se simplesmente a média do CPC dos cursos 
 que derivam do núcleo comum.
 
@@ -200,10 +200,10 @@ que derivam do núcleo comum.
 Como estes cursos não possuem nem CPC Contínuo, nem Conceito CAPES, eles não contribuem para o ICDC. Um professor que 
 leciona exclusivamente em cursos técnicos, por exemplo, terá ICDC = 0. 
 
-### Período de tempo de cálculo
+### Período do cálculo
 
-O ICDC pode ser apenas calculado a partir do ano de 2019, pois a informação de encargos didáticos anterior a este ano
-não está disponível.
+O ICDC pode ser apenas calculado a partir do ano de 2019, pois as informações de encargos didáticos anteriores a 2019
+não estão disponíveis.
 
 ## Exemplos
 
