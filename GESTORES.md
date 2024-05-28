@@ -72,7 +72,17 @@ Onde:
   cálculo;
 * $\text{encargo}^{(t)}$ é o encargo didático da turma;
 * $\text{CC}^{(t)}$ é o conceito do curso da turma: CPC contínuo mais recente para cursos de graduação, e Conceito CAPES
-  mais recente para cursos de pós-graduação.
+  **convertido** mais recente para cursos de pós-graduação.
+
+O conceito CAPES convertido segue tabela proporcionada pelo INEP:
+
+| Conceito CAPES | Nota para fins de cálculo do ICDC |
+|---------------:|----------------------------------:|
+|              3 |                                 4 |
+|              4 |                               4.5 |
+|              5 |                                 5 |
+|              6 |                                 5 |
+|              7 |                                 5 |
 
 > [!NOTE]
 > **Por que apenas alunos do mesmo curso do curso que solicitou a turma são contabilizados?**
@@ -99,23 +109,23 @@ Alunos de graduação sempre possuem peso $P\_{\text{graduação}}^{(t)} = 1$, i
 
 ##### Equivalência de alunos de mestrado
 
-| Conceito do mestrado CAPES | $P\_{\text{mestrado},c}$ |
-|:---------------------------|:-------------------------|
-| 3                          | 1                        |
-| 4                          | 2                        |
-| 5                          | 3                        |
-| 6                          | 3                        |
-| 7                          | 3                        |
+| Conceito do mestrado CAPES | $P\_{\text{mestrado}}$ |
+|:---------------------------|:-----------------------|
+| 3                          | 1                      |
+| 4                          | 2                      |
+| 5                          | 3                      |
+| 6                          | 3                      |
+| 7                          | 3                      |
 
 ##### Equivalência de alunos de doutorado
 
-| Conceito do doutorado CAPES | $P\_{\text{doutorado},c}$ |
-|:----------------------------|:--------------------------|
-| 3                           | 1                         |
-| 4                           | 2                         |
-| 5                           | 3                         |
-| 6                           | 4                         |
-| 7                           | 5                         |
+| Conceito do doutorado CAPES | $P\_{\text{doutorado}}$ |
+|:----------------------------|:------------------------|
+| 3                           | 1                       |
+| 4                           | 2                       |
+| 5                           | 3                       |
+| 6                           | 4                       |
+| 7                           | 5                       |
 
 ### Proporção de alunos
 
@@ -156,18 +166,24 @@ $$
 
 Onde:
 
+* $N\^{(t)}$ é o número de alunos em uma turma $t$;
+* $P\_{m}\^{(t)}$ é peso dos alunos da turma $t$ que pertencem à modalidade $m$, conforme 
+  [Seção Relação de peso de alunos](#relação-de-peso-de-alunos);
 * $T\_{\text{graduação}}$, $T\_{\text{mestrado}}$ e $T\_{\text{doutorado}}$ são respectivamente o número de alunos de 
   graduação, mestrado e doutorado, cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor
   deu aula no ano do cálculo;
-* \sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)} são todos os alunos, de todas as turmas $T$ e todas as modalidades 
-  $M$, cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor deu aula no ano do cálculo.
+* $\sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)}$ são todos os alunos, de todas as turmas $T$ e todas as 
+  modalidades $M$, cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor deu aula no ano
+  do cálculo.
 
 ### Cálculo do ICDC
 
 O ICDC é dado por
 
 $$
-ICDC = \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}}
+ICDC = \alpha * \text{Média}\_{\text{graduação}} + 
+       \beta * \text{Média}\_{\text{mestrado}} + 
+       \gamma * \text{Média}\_{\text{doutorado}}
 $$
 
 ## Casos especiais
@@ -219,9 +235,9 @@ $$
 $$
 
 O docente João da Silva possui 47 alunos no total, mas apenas 35 são do curso que solicitou as turmas nas 
-quais eles estudaram. Então $\sum\_{t}^{T} N\^{(t)} = (20 + 15) = 35$.
+quais eles estudaram. Então $\sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)} = (20 * 1 + 15 * 1) = 35$.
 
-Como o docente leciona apenas na graduação, seu $\alpha$ será $\alpha = \frac{35}{35} = 1$. 
+Como o docente leciona apenas na graduação, $\alpha = \frac{35}{35} = 1$. 
 
 O ICDC do docente João da Silva é
 
@@ -282,10 +298,10 @@ turma, ao invés do **curso**.
 Alunos de graduação que cursam disciplinas de pós-graduação, bem como alunos especiais (e.g. servidores), **não são** 
 contabilizados no cálculo do ICDC.
 
-| Turma | Disciplina                | Modalidade    |    Encargo didático | Curso de solicitação da turma           | Conceito de Curso (CC) |                                                                Alunos |
-|:------|:--------------------------|:--------------|--------------------:|:----------------------------------------|-----------------------:|----------------------------------------------------------------------:|
-| 10    | Cálculo A                 | Graduação     | 90h (João da Silva) | Engenharia Química (Curso de Graduação) |                  3.366 |                          20 (Eng. Química); 7 (Ciência da Computação) |
-| 11    | Método Científico e Ética | Pós-Graduação | 60h (João da Silva) | Química (Programa de Pós-Graduação)     |                      7 | 5 (Química - Mestrado); 3 (Química - Doutorado); 2 (alunos especiais) |
+| Turma | Disciplina                | Modalidade    |    Encargo didático | Curso de solicitação da turma           |     Conceito de Curso (CC) |                                                                Alunos |
+|:------|:--------------------------|:--------------|--------------------:|:----------------------------------------|---------------------------:|----------------------------------------------------------------------:|
+| 10    | Cálculo A                 | Graduação     | 90h (João da Silva) | Engenharia Química (Curso de Graduação) |                      3.366 |                          20 (Eng. Química); 7 (Ciência da Computação) |
+| 11    | Método Científico e Ética | Pós-Graduação | 60h (João da Silva) | Química (Programa de Pós-Graduação)     | 7 (Conceito CAPES); 5 (CC) | 5 (Química - Mestrado); 3 (Química - Doutorado); 2 (alunos especiais) |
 
 
 #### Nota média da graduação
@@ -312,11 +328,11 @@ $$
 \begin{aligned}
 \text{Média}\_{\text{mestrado}} &= \frac{\sum\_{t}^{T \in \text{mestrado}} (N\^{(t)} * P\_{\text{mestrado}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{mestrado}} (N^{(t)} * P\_{\text{mestrado}}^{(t)} * \text{encargo}^{(t)})} \\
 & \\
-\text{Média}\_{\text{mestrado}} &= \frac{(5 * 3 * 60 * 7)}{(5 * 3 * 60)} \\
+\text{Média}\_{\text{mestrado}} &= \frac{(5 * 3 * 60 * 5)}{(5 * 3 * 60)} \\
 & \\
-\text{Média}\_{\text{mestrado}} &= \frac{6300}{900} \\
+\text{Média}\_{\text{mestrado}} &= \frac{4500}{900} \\
 & \\
-\text{Média}\_{\text{mestrado}} &= 7
+\text{Média}\_{\text{mestrado}} &= 5
 \end{aligned}
 $$
 
@@ -330,26 +346,38 @@ $$
 \begin{aligned}
 \text{Média}\_{\text{doutorado}} &= \frac{\sum\_{t}^{T \in \text{doutorado}} (N\^{(t)} * P\_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)} * \text{CC}^{(t)})}{\sum\_{t}^{T \in \text{doutorado}} (N^{(t)} * P\_{\text{doutorado}}^{(t)} * \text{encargo}^{(t)})} \\
 & \\
-\text{Média}\_{\text{doutorado}} &= \frac{(3 * 5 * 60 * 7)}{(3 * 5 * 60)} \\
+\text{Média}\_{\text{doutorado}} &= \frac{(3 * 5 * 60 * 5)}{(3 * 5 * 60)} \\
 & \\
-\text{Média}\_{\text{doutorado}} &= \frac{6300}{900} \\
+\text{Média}\_{\text{doutorado}} &= \frac{4500}{900} \\
 & \\
-\text{Média}\_{\text{doutorado}} &= 7
+\text{Média}\_{\text{doutorado}} &= 5
 \end{aligned}
 $$
 
 #### Proporções de alunos
 
 O docente leciona para 37 alunos no total, mas apenas 28 são de cursos ou programas que solicitaram as turmas. Portanto,
-seu número de alunos é $\sum\_{t}^{T} N\^{(t)} = 28$.
+seu número de alunos é $\sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)} = (20 * 1) + (5 * 3) + (3 * 5) = 50$.
 
 $$
 \begin{aligned}
-\alpha &= \frac{\sum\_{t}^{T\_{\text{graduação}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{20}{28} \approx 0.71 \\
+\alpha &= \frac{
+  \sum\_{t}^{T\_{\text{graduação}}} N\^{(t)}
+}{
+  \sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)}
+} = \frac{20}{50} = 0.4 \\
 & \\
-\beta &= \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{5}{28} \approx 0.18 \\
+\beta &= \frac{
+  \sum\_{t}^{T\_{\text{mestrado}}} N\^{(t)}
+}{
+  \sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)}
+} = \frac{15}{50} = 0.3 \\
 & \\
-\gamma &= \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}} = \frac{3}{28} \approx 0.11
+\gamma &= \frac{
+  \sum\_{t}^{T\_{\text{doutorado}}} N\^{(t)}
+}{
+  \sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)}
+} = \frac{15}{50} = 0.3
 \end{aligned}
 $$
 
@@ -361,8 +389,8 @@ $$
 \begin{aligned}
 ICDC &= \alpha * \text{Média}\_{\text{graduação}} + \beta * \text{Média}\_{\text{mestrado}} + \gamma * \text{Média}\_{\text{doutorado}} \\
 & \\
-ICDC &= (0.71 * 3.366) + (0.18 * 7) + (0.11 * 7) \\
+ICDC &= (0.4 * 3.366) + (0.3 * 5) + (0.3 * 5) \\
 & \\
-ICDC &= 4.41986 
+ICDC &= 4.3464
 \end{aligned}
 $$
