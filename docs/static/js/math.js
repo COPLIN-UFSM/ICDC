@@ -152,8 +152,8 @@ function mostraFormulas(docente, dados_docentes) {
                     denominador += den;
                     numerador += den * turma['cc'];
 
-                    alunos_modalidades[modalidade] += turma['alunos'];
-                    n_alunos += turma['alunos'];
+                    alunos_modalidades[modalidade] += (turma['alunos'] * turma['peso_aluno']);
+                    n_alunos += (turma['alunos'] * turma['peso_aluno']);
 
                     latex_num_str.push('(' + turma['alunos'] + ' * ' + turma['peso_aluno'] + ' * ' + turma['encargo'] + ' * ' + turma['cc'] + ')')
                     latex_den_str.push('(' + turma['alunos'] + ' * ' + turma['peso_aluno'] + ' * ' + turma['encargo'] + ')')

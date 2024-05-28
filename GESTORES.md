@@ -119,26 +119,39 @@ Alunos de graduação sempre possuem peso $P\_{\text{graduação}}^{(t)} = 1$, i
 
 ### Proporção de alunos
 
-A proporção de alunos $\alpha$, $\beta$ e $\gamma$ são simplesmente o somatório do número de alunos, cujo curso é o 
+A proporção de alunos $\alpha$, $\beta$ e $\gamma$ são simplesmente o somatório do número de alunos **vezes** o peso dos
+alunos (conforme tabelas da [Seção Relação de peso de alunos](#relação-de-peso-de-alunos), cujo curso é o 
 mesmo do curso de solicitação da vaga na turma, **para aquela modalidade,** dividido pelo número de alunos, cujo curso 
 é o mesmo do curso de solicitação da vaga na turma, **para todas as modalidades:**
 
 #### Graduação
 
 $$
-\alpha = \frac{\sum\_{t}^{T\_{\text{graduação}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}}
+\alpha = \frac{
+  \sum\_{t}^{T\_{\text{graduação}}} N\^{(t)}
+}{
+  \sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)}
+}
 $$
 
 #### Mestrado
 
 $$
-\beta = \frac{\sum\_{t}^{T\_{\text{mestrado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}}
+\beta = \frac{
+  \sum\_{t}^{T\_{\text{mestrado}}} N\^{(t)}
+}{
+  \sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)}
+}
 $$
 
 #### Doutorado
 
 $$
-\gamma = \frac{\sum\_{t}^{T\_{\text{doutorado}}} N\^{(t)}}{\sum\_{t}^{T} N\^{(t)}}
+\gamma = \frac{
+  \sum\_{t}^{T\_{\text{doutorado}}} N\^{(t)}
+}{
+  \sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)}
+}
 $$
 
 Onde:
@@ -146,8 +159,8 @@ Onde:
 * $T\_{\text{graduação}}$, $T\_{\text{mestrado}}$ e $T\_{\text{doutorado}}$ são respectivamente o número de alunos de 
   graduação, mestrado e doutorado, cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor
   deu aula no ano do cálculo;
-* $\sum\_{t}^{T} N\^{(t)}$ são todos os alunos cujo curso é o mesmo curso de solicitação de vaga na turma, para os 
-  quais o professor deu aula no ano do cálculo.
+* \sum\_{t}^{T} \sum_{m}^{M} N\^{(t)} * P\_{m}\^{(t)} são todos os alunos, de todas as turmas $T$ e todas as modalidades 
+  $M$, cujo curso é o mesmo curso de solicitação de vaga na turma, para os quais o professor deu aula no ano do cálculo.
 
 ### Cálculo do ICDC
 
