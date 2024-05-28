@@ -3,6 +3,9 @@ function getElementValue(name) {
 }
 
 function relacaoPesoAluno(modalidade, conceito) {
+    /**
+     * Conceito é CPC ou Conceito CAPES, não é o Conceito CAPES convertido
+     */
     if (modalidade === 'graduacao') {
         return 1;
     }
@@ -21,6 +24,14 @@ function relacaoPesoAluno(modalidade, conceito) {
         if (parseInt(conceito) === 7) return 5;
     }
     return null;
+}
+
+function conceitoCAPESconvertido(conceito) {
+    if (parseInt(conceito) === 3) return 4;
+    if (parseInt(conceito) === 4) return 4.5;
+    if (parseInt(conceito) === 5) return 5;
+    if (parseInt(conceito) === 6) return 5;
+    if (parseInt(conceito) === 7) return 5;
 }
 
 function correctName(modalidade) {
@@ -43,10 +54,12 @@ function coletaDadosTurmas() {
         data[row]['nivel'] = getElementValue('select-nivel-' + row);
         if (data[row]['nivel'] === 'graduacao') {
             data[row]['cc'] = parseFloat(getElementValue('input-cpc-' + row));
+            data[row]['cpc'] = parseFloat(getElementValue('input-cpc-' + row));
             data[row]['alunos'] = {};
             data[row]['alunos']['graduacao'] = parseInt(getElementValue('input-curso-solicitacao-graduacao-' + row));
         } else {
-            data[row]['cc'] = parseFloat(getElementValue('input-capes-' + row));
+            data[row]['cc'] = conceitoCAPESconvertido(parseInt(getElementValue('input-capes-' + row)));
+            data[row]['conceito_capes'] = parseInt(getElementValue('input-capes-' + row));
 
             data[row]['alunos'] = {};
             data[row]['alunos']['mestrado'] = parseInt(getElementValue('input-curso-solicitacao-mestrado-' + row));
@@ -86,13 +99,13 @@ function organizaDados(data) {
                 dados_turma_mestrado['encargo'] = col_dict['encargo'];
                 dados_turma_mestrado['modalidade'] = 'mestrado';
                 dados_turma_mestrado['alunos'] = row_dict['alunos']['mestrado'];
-                dados_turma_mestrado['peso_aluno'] = relacaoPesoAluno('mestrado', row_dict['cc']);
+                dados_turma_mestrado['peso_aluno'] = relacaoPesoAluno('mestrado', row_dict['conceito_capes']);
 
                 dados_turma_doutorado['cc'] = row_dict['cc'];
                 dados_turma_doutorado['encargo'] = col_dict['encargo'];
                 dados_turma_doutorado['modalidade'] = 'doutorado';
                 dados_turma_doutorado['alunos'] = row_dict['alunos']['doutorado'];
-                dados_turma_doutorado['peso_aluno'] = relacaoPesoAluno('doutorado', row_dict['cc']);
+                dados_turma_doutorado['peso_aluno'] = relacaoPesoAluno('doutorado', row_dict['conceito_capes']);
 
                 dados_docentes[col_dict['nome']].push(dados_turma_mestrado);
                 dados_docentes[col_dict['nome']].push(dados_turma_doutorado);
@@ -100,10 +113,11 @@ function organizaDados(data) {
             } else {
                 let dados_turma = {};
                 dados_turma['cc'] = row_dict['cc'];
+                dados_turma['cpc'] = row_dict['cc'];
                 dados_turma['encargo'] = col_dict['encargo'];
                 dados_turma['modalidade'] = 'graduacao';
                 dados_turma['alunos'] = row_dict['alunos']['graduacao'];
-                dados_turma['peso_aluno'] = relacaoPesoAluno('graduacao', dados_turma['cc']);
+                dados_turma['peso_aluno'] = relacaoPesoAluno('graduacao', dados_turma['cpc']);
 
                 // insere na lista
                 dados_docentes[col_dict['nome']].push(dados_turma);
@@ -176,6 +190,8 @@ function mostraFormulas(docente, dados_docentes) {
             }
         }
     }
+
+    // mostra fórmulas de proporção
     for(let i = 0; i < modalidades.length; i++) {
         let modalidade = modalidades[i];
 
@@ -198,7 +214,7 @@ function mostraFormulas(docente, dados_docentes) {
         (proporcoes['mestrado'] * notas_medias['mestrado']) +
         (proporcoes['doutorado'] * notas_medias['doutorado'])
     );
-    icdc = Math.round(icdc * 1000) / 1000;
+    icdc = Math.round(icdc * 10000) / 10000;
 
     document.getElementById('icdc-2').innerText = '$$ =' + icdc + '$$';
 }
