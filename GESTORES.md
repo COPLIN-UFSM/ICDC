@@ -1,3 +1,5 @@
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/COPLIN-UFSM/ICDC/main/GESTORES.md)
+
 # Gestores
 
 Este documento detalha a lógica de cálculo do **Índice de Contribuição Docente na Qualidade do Curso**, ou **ICDC.**
